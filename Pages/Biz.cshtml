@@ -1,6 +1,13 @@
 @page "/biz"
 @{
     ViewData["Title"] = "Biz — Creida";
+    var posts = new[]
+    {
+        "DYrZMu6Nt9O","DYrY8VDtqSQ","DYrYp2AtunS","DYrYgfNt1Qx","DYrYXSNtqsS",
+        "DYrYKkMNba4","DYrYBp4tx3w","DYrXzu9Nrur","DYrXoCkNjXd","DYrXXhFtjHr",
+        "DYrXMzzNdRC","DYrXDxANeM1","DYrW0ZGu0Uc","DYrWpuhO47j","DYrWeOzuw6c",
+        "DYrRd9WuLP5","DYrRSTZu0hl","DYrRApxOlAk","DYrQVC5Owaf","DYrQIOhOGdL"
+    };
 }
 
 @*
@@ -47,24 +54,29 @@
                     <span class="line">ajans.</span>
                 </h1>
                 <p class="biz-lead">
-                    Aşağıda son dönemden seçili görseller. Sol taraftaki video kaydırırken
-                    seninle kalır — biz de öyle.
+                    Son dönem işlerimizden bir kesit. Her kart Instagram'daki orijinal post'a açılır.
+                    Sol taraftaki video kaydırırken seninle kalır — biz de öyle.
                 </p>
+                <a class="biz-ig-link" href="https://www.instagram.com/creidaco/" target="_blank" rel="noopener">
+                    @@creidaco · Instagram'da takip et →
+                </a>
             </header>
 
-            @* Görsel placeholder'ları — kullanıcı gerçek görselleri gönderince doldurulacak *@
-            @for (int i = 1; i <= 6; i++)
-            {
-                <figure class="biz-figure reveal">
-                    <div class="biz-figure__placeholder" data-placeholder="Görsel @i">
-                        <span class="biz-figure__hint">Görsel @i</span>
-                    </div>
-                    <figcaption class="biz-figure__caption">Görsel @i açıklaması</figcaption>
-                </figure>
-            }
+            <div class="biz-grid reveal">
+                @for (int i = 0; i < posts.Length; i++)
+                {
+                    var idx = (i + 1).ToString("D2");
+                    var code = posts[i];
+                    <a class="biz-tile" href="https://www.instagram.com/p/@code/" target="_blank" rel="noopener" aria-label="Instagram post @code">
+                        <img src="/img/instagram/creida-@idx.jpg" alt="Creida Instagram post @idx" loading="lazy" />
+                    </a>
+                }
+            </div>
 
             <div class="biz-end reveal">
-                <p>Tüm görseller yüklendiğinde burası canlanır.</p>
+                <a href="https://www.instagram.com/creidaco/" target="_blank" rel="noopener" class="biz-end-link">
+                    Tüm gönderiler · @@creidaco →
+                </a>
             </div>
 
         </div>
