@@ -1196,6 +1196,21 @@ section {
     color: var(--bg);
 }
 
+/* Primary CTA: dolu, kontrast (beyaz/siyah) */
+.cta-primary {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+.cta-primary:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+    transform: translateY(-1px);
+    opacity: 0.92;
+}
+.cta-primary svg path { stroke: var(--bg); }
+
 .contact-side {
     border-left: 1px solid var(--line);
     padding-left: clamp(24px, 4vw, 48px);
