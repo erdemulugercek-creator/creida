@@ -97,43 +97,38 @@
                 <a href="/#contact">@L["Nav.Contact"]</a>
             </nav>
 
-            @* Mobile menü — tam sitemap *@
+            @* Mobile menü — desktop nav ile aynı *@
             <div class="mobile-nav" id="mobile-nav" hidden>
-                <div class="mobile-nav-section">
-                    <h5>Çalışmalar</h5>
-                    <ul>
-                        <li><a href="/sectors">Tüm sektörler</a></li>
-                        <li><a href="/sectors/fintech">Fintech için</a></li>
-                        <li><a href="/sectors/dtc">DTC için</a></li>
-                        <li><a href="/sectors/b2b-saas">B2B SaaS için</a></li>
-                    </ul>
+                <ul class="mobile-nav-list">
+                    <li><a href="/process">@L["Nav.Process"]</a></li>
+                    <li><a href="/insights">@L["Nav.Insights"]</a></li>
+                    <li><a href="/biz">@L["Nav.About"]</a></li>
+                    <li><a href="/#contact">@L["Nav.Contact"]</a></li>
+                </ul>
+                <div class="mobile-nav-cta">
+                    <a class="cta-button cta-button--big cta-primary" href="/#contact">
+                        <span>@L["Nav.SendBrief"]</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
                 </div>
-                <div class="mobile-nav-section">
-                    <h5>Şeffaflık</h5>
-                    <ul>
-                        <li><a href="/pricing">Fiyatlandırma</a></li>
-                        <li><a href="/results">Canlı sonuçlar</a></li>
-                        <li><a href="/availability">Müsaitlik</a></li>
-                        <li><a href="/report">Yıllık rapor</a></li>
-                    </ul>
-                </div>
-                <div class="mobile-nav-section">
-                    <h5>Hakkımızda</h5>
-                    <ul>
-                        <li><a href="/process">Çalışma şeklimiz</a></li>
-                        <li><a href="/manifesto">Yapmadıklarımız</a></li>
-                        <li><a href="/insights">Insights</a></li>
-                    </ul>
-                </div>
-                <div class="mobile-nav-section">
-                    <h5>Araçlar</h5>
-                    <ul>
-                        <li><a href="/brief">Brief Sihirbazı</a></li>
-                        <li><a href="/resources">Kaynaklar</a></li>
-                        <li><a href="/press">Basın</a></li>
-                        <li><a href="/careers">Kariyer</a></li>
-                        <li><a href="/#contact">İletişim</a></li>
-                    </ul>
+                <div class="mobile-nav-social">
+                    <a href="https://www.instagram.com/creidaco/" target="_blank" rel="noopener" aria-label="Instagram'da Creida">
+                        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.8" />
+                            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/creidaco" target="_blank" rel="noopener" aria-label="LinkedIn'de Creida">
+                        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="3" ry="3" fill="none" stroke="currentColor" stroke-width="1.8" />
+                            <line x1="7" y1="10" x2="7" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                            <circle cx="7" cy="7.2" r="1.1" fill="currentColor" />
+                            <path d="M11 17v-7M11 12.5c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5V17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
                 </div>
             </div>
 
