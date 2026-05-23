@@ -1,32 +1,31 @@
 (function () {
     "use strict";
 
-    // ---------- Hero video sesi aç/kapa ----------
-    const heroVideoFrame = document.querySelector(".hero-video__frame");
-    if (heroVideoFrame) {
-        const player = heroVideoFrame.querySelector(".hero-video__player");
-        const soundBtn = heroVideoFrame.querySelector(".hero-video__sound");
-        if (player && soundBtn) {
-            const setState = (muted) => {
-                player.muted = muted;
-                soundBtn.dataset.state = muted ? "muted" : "unmuted";
-                soundBtn.setAttribute("aria-label", muted ? "Sesi aç" : "Sesi kapat");
-            };
-            soundBtn.addEventListener("click", () => {
-                const willUnmute = player.muted;
-                setState(!willUnmute);
-                if (willUnmute) {
-                    // Tarayıcı kullanıcı etkileşimi sonrası play çağrısını ister
-                    player.play().catch(() => { /* yoksay */ });
-                }
-            });
-            // Sayfa görünür değilse pause et (pil tasarrufu)
-            document.addEventListener("visibilitychange", () => {
-                if (document.hidden) player.pause();
-                else player.play().catch(() => { /* yoksay */ });
-            });
-        }
-    }
+    // ---------- Video sesi aç/kapa (hero + biz sayfası ortak) ----------
+    document.querySelectorAll(".hero-video__frame, .biz-video__frame").forEach((frame) => {
+        const isBiz = frame.classList.contains("biz-video__frame");
+        const playerSel = isBiz ? ".biz-video__player" : ".hero-video__player";
+        const soundSel = isBiz ? ".biz-video__sound" : ".hero-video__sound";
+        const player = frame.querySelector(playerSel);
+        const soundBtn = frame.querySelector(soundSel);
+        if (!player || !soundBtn) return;
+        const setState = (muted) => {
+            player.muted = muted;
+            soundBtn.dataset.state = muted ? "muted" : "unmuted";
+            soundBtn.setAttribute("aria-label", muted ? "Sesi aç" : "Sesi kapat");
+        };
+        soundBtn.addEventListener("click", () => {
+            const willUnmute = player.muted;
+            setState(!willUnmute);
+            if (willUnmute) {
+                player.play().catch(() => { /* yoksay */ });
+            }
+        });
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) player.pause();
+            else player.play().catch(() => { /* yoksay */ });
+        });
+    });
 
     // ---------- Tema (dark / light) toggle ----------
     const themeToggle = document.querySelector(".theme-toggle");

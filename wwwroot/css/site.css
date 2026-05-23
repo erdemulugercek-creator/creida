@@ -1,4 +1,177 @@
 /* ============================================================
+   BIZ SAYFASI — Sol sticky video + sağ scroll içerik
+   ============================================================ */
+.biz {
+    padding: clamp(100px, 14vh, 160px) 0 clamp(80px, 12vh, 140px);
+    background: var(--bg);
+    color: var(--text);
+}
+.biz-inner {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+}
+@media (min-width: 960px) {
+    .biz-inner {
+        grid-template-columns: minmax(280px, 1fr) minmax(0, 1.2fr);
+        gap: clamp(48px, 6vw, 96px);
+    }
+}
+.biz-sticky {
+    width: 100%;
+}
+@media (min-width: 960px) {
+    .biz-sticky {
+        position: sticky;
+        top: calc(var(--header-height, 80px) + 32px);
+        align-self: start;
+    }
+}
+.biz-video {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+.biz-video__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 32px;
+    overflow: hidden;
+    background: #000;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,
+        0 40px 80px -30px rgba(0, 0, 0, 0.6),
+        0 16px 50px -20px rgba(0, 0, 0, 0.5);
+    isolation: isolate;
+}
+.biz-video__player {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #000;
+}
+.biz-video__sound {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    z-index: 2;
+}
+.biz-video__sound:hover {
+    background: rgba(0, 0, 0, 0.78);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: scale(1.05);
+}
+.biz-video__sound:focus-visible {
+    outline: 2px solid var(--accent, #fff);
+    outline-offset: 2px;
+}
+.biz-video__icon { display: none; }
+.biz-video__sound[data-state="muted"] .biz-video__icon--muted { display: block; }
+.biz-video__sound[data-state="unmuted"] .biz-video__icon--unmuted { display: block; }
+
+.biz-scroll {
+    display: grid;
+    gap: clamp(40px, 5vw, 72px);
+    min-width: 0;
+}
+
+.biz-intro {
+    display: grid;
+    gap: 20px;
+    padding-bottom: clamp(16px, 3vw, 32px);
+    border-bottom: 1px solid var(--line, rgba(255,255,255,0.1));
+}
+.biz-intro .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-mute, rgba(255,255,255,0.6));
+}
+.biz-headline {
+    font-size: clamp(32px, 4.5vw, 64px);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+.biz-headline .line { display: block; }
+.biz-lead {
+    font-size: clamp(16px, 1.3vw, 19px);
+    color: var(--text-mute, rgba(255,255,255,0.7));
+    max-width: 50ch;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.biz-figure {
+    margin: 0;
+    display: grid;
+    gap: 14px;
+}
+.biz-figure__placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.03) 0,
+            rgba(255, 255, 255, 0.03) 12px,
+            rgba(255, 255, 255, 0.06) 12px,
+            rgba(255, 255, 255, 0.06) 24px
+        );
+    border: 1px dashed rgba(255, 255, 255, 0.18);
+    display: grid;
+    place-items: center;
+    color: var(--text-mute, rgba(255,255,255,0.4));
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.biz-figure__hint { opacity: 0.7; }
+.biz-figure__caption {
+    font-size: 13px;
+    color: var(--text-mute, rgba(255,255,255,0.55));
+    letter-spacing: 0.02em;
+}
+
+.biz-end {
+    padding: clamp(24px, 4vw, 48px) 0;
+    text-align: center;
+    color: var(--text-mute, rgba(255,255,255,0.5));
+    font-size: 14px;
+    border-top: 1px solid var(--line, rgba(255,255,255,0.08));
+}
+
+@media (max-width: 959px) {
+    /* Mobilde sticky kaldır, sıralı akış */
+    .biz-sticky { position: static; }
+    .biz-video { max-width: 280px; }
+}
+
+/* ============================================================
    Creide — Reklam Ajansı
    Tasarım sistemi: koyu, sofistike, sinematik
    ============================================================ */

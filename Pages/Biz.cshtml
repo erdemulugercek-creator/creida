@@ -1,0 +1,73 @@
+@page "/biz"
+@{
+    ViewData["Title"] = "Biz — Creida";
+}
+
+@*
+  ============================================================
+  BIZ — Sol sticky video + sağ scroll içerik
+  Sol taraf: video sayfa kaydırılınca sabit kalır
+  Sağ taraf: görseller/içerik aşağı doğru akar
+  ============================================================
+*@
+<section class="biz">
+    <div class="biz-inner">
+
+        @* SOL: Sticky video (sayfa kaydırıldıkça sabit) *@
+        <aside class="biz-sticky" aria-label="Creida tanıtım videosu">
+            <div class="biz-video">
+                <div class="biz-video__frame">
+                    <video class="biz-video__player"
+                           autoplay muted loop playsinline preload="metadata"
+                           poster="/videos/creida-hero-poster.jpg">
+                        <source src="/videos/creida-hero.mp4" type="video/mp4" />
+                    </video>
+                    <button type="button" class="biz-video__sound" data-state="muted" aria-label="Sesi aç">
+                        <svg class="biz-video__icon biz-video__icon--muted" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                            <path d="M11 5L6 9H3v6h3l5 4V5z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round" />
+                            <path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                        <svg class="biz-video__icon biz-video__icon--unmuted" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                            <path d="M11 5L6 9H3v6h3l5 4V5z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round" />
+                            <path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        @* SAĞ: Scroll yapan görsel/içerik kolonu *@
+        <div class="biz-scroll">
+
+            <header class="biz-intro reveal">
+                <span class="eyebrow">Biz</span>
+                <h1 class="display biz-headline">
+                    <span class="line">Markayı doğru kuran,</span>
+                    <span class="line italic accent">performansı kanıtla yöneten</span>
+                    <span class="line">ajans.</span>
+                </h1>
+                <p class="biz-lead">
+                    Aşağıda son dönemden seçili görseller. Sol taraftaki video kaydırırken
+                    seninle kalır — biz de öyle.
+                </p>
+            </header>
+
+            @* Görsel placeholder'ları — kullanıcı gerçek görselleri gönderince doldurulacak *@
+            @for (int i = 1; i <= 6; i++)
+            {
+                <figure class="biz-figure reveal">
+                    <div class="biz-figure__placeholder" data-placeholder="Görsel @i">
+                        <span class="biz-figure__hint">Görsel @i</span>
+                    </div>
+                    <figcaption class="biz-figure__caption">Görsel @i açıklaması</figcaption>
+                </figure>
+            }
+
+            <div class="biz-end reveal">
+                <p>Tüm görseller yüklendiğinde burası canlanır.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
