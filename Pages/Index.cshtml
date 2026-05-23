@@ -284,13 +284,13 @@
 
                         <div class="field">
                             <label for="Form_Name">@L["Contact.Form.Name"]</label>
-                            <input id="Form_Name" asp-for="Form.Name" placeholder="@L["Contact.Form.NamePh"]" autocomplete="name" data-required />
+                            <input id="Form_Name" asp-for="Form.Name" autocomplete="name" data-required />
                             <span asp-validation-for="Form.Name" class="validation"></span>
                         </div>
 
                         <div class="field">
                             <label for="Form_Email">@L["Contact.Form.Email"]</label>
-                            <input id="Form_Email" asp-for="Form.Email" type="email" placeholder="@L["Contact.Form.EmailPh"]" autocomplete="email" data-required />
+                            <input id="Form_Email" asp-for="Form.Email" type="email" autocomplete="email" data-required />
                             <span asp-validation-for="Form.Email" class="validation"></span>
                         </div>
 
