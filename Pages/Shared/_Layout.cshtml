@@ -1,0 +1,396 @@
+@using System.Globalization
+@inject Creida.Services.SiteSettingsService SiteSettings
+@inject Creida.Services.AppearanceService Appearance
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+    var site = SiteSettings.Get();
+    var appearance = Appearance.Get();
+    var googleFontsUrl = appearance.GoogleFontsUrl();
+}
+<!DOCTYPE html>
+<html lang="@currentCulture">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="@L["Hero.Tail"]" />
+    <meta property="og:title" content="@(ViewData["Title"] ?? "Creida")" />
+    <meta property="og:description" content="@L["Footer.Tagline"]" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://creida.co" />
+
+    <title>@(ViewData["Title"] ?? "Creida")</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    @* Jost — Futura'nın ücretsiz/açık kaynak alternatifi. Mac kullanıcıları zaten sistemdeki gerçek Futura'yı görür. *@
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @if (!string.IsNullOrEmpty(googleFontsUrl))
+    {
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="stylesheet" href="@googleFontsUrl" />
+    }
+    <style>@Html.Raw(appearance.ToCssVariables())</style>
+
+    @* JSON-LD Organization schema (her sayfada) *@
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "Creida",
+        "alternateName": "Creida Reklam Ajansı",
+        "url": "https://creida.co",
+        "logo": "https://creida.co/img/logo.png",
+        "description": "Kreatif düşünce ile dijital performansı birleştiren bağımsız bir reklam ajansı.",
+        "founder": [
+            { "@@type": "Person", "name": "Erdem Ulugerçek", "jobTitle": "Kurucu Ortak · Strateji" },
+            { "@@type": "Person", "name": "Giray Can Muştu", "jobTitle": "Kurucu Ortak · Büyüme" },
+            { "@@type": "Person", "name": "Begüm Yaşlı", "jobTitle": "Creative Director" }
+        ],
+        "address": { "@@type": "PostalAddress", "addressLocality": "Kadıköy", "addressRegion": "İstanbul", "addressCountry": "TR" },
+        "email": "hello@creida.co",
+        "telephone": "+90 531 405 30 70",
+        "sameAs": ["https://instagram.com/creidaco", "https://linkedin.com/company/creidaco"]
+    }
+    </script>
+
+    @* Plausible Analytics (opsiyonel — appsettings.json'da Analytics:PlausibleDomain doldurulursa aktif) *@
+    @{
+        var plausibleDomain = AppConfig["Analytics:PlausibleDomain"];
+    }
+    @if (!string.IsNullOrEmpty(plausibleDomain))
+    {
+        <script defer data-domain="@plausibleDomain" src="https://plausible.io/js/script.js"></script>
+    }
+
+    @* FOUC önleyici: CSS henüz uygulanmadan tema seçimini html'e yaz *@
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('creida-theme');
+                document.documentElement.setAttribute('data-theme', saved || 'dark');
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">@(currentCulture == "en" ? "Skip to content" : "İçeriğe atla")</a>
+
+    <header class="site-header" id="site-header">
+        <div class="container header-inner">
+            <div class="logo-cluster">
+                <a class="logo" href="/" aria-label="Creida">
+                    <img src="~/img/logo.png" alt="Creida — creative idea agency" class="logo-img" />
+                </a>
+            </div>
+
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="/process">@L["Nav.Process"]</a>
+                <a href="/insights">@L["Nav.Insights"]</a>
+                <a href="/#contact">@L["Nav.Contact"]</a>
+            </nav>
+
+            @* Mobile menü — tam sitemap *@
+            <div class="mobile-nav" id="mobile-nav" hidden>
+                <div class="mobile-nav-section">
+                    <h5>Çalışmalar</h5>
+                    <ul>
+                        <li><a href="/sectors">Tüm sektörler</a></li>
+                        <li><a href="/sectors/fintech">Fintech için</a></li>
+                        <li><a href="/sectors/dtc">DTC için</a></li>
+                        <li><a href="/sectors/b2b-saas">B2B SaaS için</a></li>
+                    </ul>
+                </div>
+                <div class="mobile-nav-section">
+                    <h5>Şeffaflık</h5>
+                    <ul>
+                        <li><a href="/pricing">Fiyatlandırma</a></li>
+                        <li><a href="/results">Canlı sonuçlar</a></li>
+                        <li><a href="/availability">Müsaitlik</a></li>
+                        <li><a href="/report">Yıllık rapor</a></li>
+                    </ul>
+                </div>
+                <div class="mobile-nav-section">
+                    <h5>Hakkımızda</h5>
+                    <ul>
+                        <li><a href="/process">Çalışma şeklimiz</a></li>
+                        <li><a href="/manifesto">Yapmadıklarımız</a></li>
+                        <li><a href="/insights">Insights</a></li>
+                    </ul>
+                </div>
+                <div class="mobile-nav-section">
+                    <h5>Araçlar</h5>
+                    <ul>
+                        <li><a href="/brief">Brief Sihirbazı</a></li>
+                        <li><a href="/resources">Kaynaklar</a></li>
+                        <li><a href="/press">Basın</a></li>
+                        <li><a href="/careers">Kariyer</a></li>
+                        <li><a href="/#contact">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <a class="cta-button cta-button--small" href="/#contact">
+                    <span>@L["Nav.SendBrief"]</span>
+                    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+
+                <button class="theme-toggle" type="button" aria-label="@(currentCulture == "en" ? "Toggle theme" : "Temayı değiştir")">
+                    <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="currentColor" />
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" fill="currentColor" />
+                        <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                            <line x1="12" y1="2" x2="12" y2="5" />
+                            <line x1="12" y1="19" x2="12" y2="22" />
+                            <line x1="2" y1="12" x2="5" y2="12" />
+                            <line x1="19" y1="12" x2="22" y2="12" />
+                            <line x1="4.9" y1="4.9" x2="7" y2="7" />
+                            <line x1="17" y1="17" x2="19.1" y2="19.1" />
+                            <line x1="4.9" y1="19.1" x2="7" y2="17" />
+                            <line x1="17" y1="7" x2="19.1" y2="4.9" />
+                        </g>
+                    </svg>
+                </button>
+
+                <button class="menu-toggle" aria-label="Menu" aria-expanded="false" type="button">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        @RenderBody()
+    </main>
+
+@* Footer geçici olarak kapatıldı — ileride geri açmak için bu if'i kaldır *@
+@if (false)
+{
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a class="logo" href="/" aria-label="Creida">
+                    <img src="~/img/logo.png" alt="Creida — creative idea agency" class="logo-img" />
+                </a>
+                <p class="footer-line">@L["Footer.Tagline"]</p>
+
+                @* Mini newsletter signup *@
+                <form class="footer-news" id="footer-news" novalidate>
+                    <label for="footer-news-email" class="footer-news-label">
+                        @(currentCulture == "en" ? "Insights to your inbox — monthly, jargon-free." : "Aylık insights — kutuna gelir, jargonsuz.")
+                    </label>
+                    <div class="footer-news-row">
+                        <input id="footer-news-email" type="email" name="email"
+                               placeholder="@(currentCulture == "en" ? "your@email.com" : "sen@markaniz.com")"
+                               aria-label="E-posta" />
+                        <button type="submit" aria-label="@(currentCulture == "en" ? "Subscribe" : "Abone ol")">
+                            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="footer-news-note muted">@(currentCulture == "en" ? "No tracking, no third parties. Unsubscribe anytime." : "Takip kodu yok, üçüncü taraf yok. İstediğin zaman çık.")</p>
+                </form>
+            </div>
+
+            <div class="footer-col">
+                <h4>@L["Footer.Studio"]</h4>
+                <p data-edit="settings.Address">@site.Address</p>
+                <p><a href="mailto:@site.Email" data-edit="settings.Email">@site.Email</a></p>
+                <p><a href="tel:@System.Text.RegularExpressions.Regex.Replace(site.Phone ?? "", "[^0-9+]", "")" data-edit="settings.Phone">@site.Phone</a></p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Çalışmak</h4>
+                <ul>
+                    <li><a href="/#contact">@L["Footer.SendBrief"]</a></li>
+                    <li><a href="/brief">Brief Sihirbazı</a></li>
+                    <li><a href="/pricing">Fiyatlandırma</a></li>
+                    <li><a href="/availability">Müsaitlik</a></li>
+                    <li><a href="/sectors">Sektörler</a></li>
+                    <li><a href="/careers">@L["Footer.Careers"]</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Şeffaflık</h4>
+                <ul>
+                    <li><a href="/results">Canlı sonuçlar</a></li>
+                    <li><a href="/report">Yıllık rapor</a></li>
+                    <li><a href="/manifesto">@L["Footer.Manifesto"]</a></li>
+                    <li><a href="/process">Çalışma şeklimiz</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Kaynaklar</h4>
+                <ul>
+                    <li><a href="/insights">Insights</a></li>
+                    <li><a href="/resources">@L["Footer.Resources"]</a></li>
+                    <li><a href="/press">@L["Footer.Press"]</a></li>
+                    <li><a href="@site.Instagram" rel="noopener" target="_blank">Instagram</a></li>
+                    <li><a href="@site.LinkedIn" rel="noopener" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <span>© @DateTime.Now.Year Creida. @L["Footer.Rights"]</span>
+            <span class="footer-bottom-mid">
+                @(currentCulture == "en" ? "No cookies. No third-party tracking. " : "Çerez yok, üçüncü taraf takip yok. ")
+                <a href="/manifesto" class="link-underline">@(currentCulture == "en" ? "Read our manifesto" : "Manifestoyu oku")</a>
+            </span>
+            <span>creida.co</span>
+        </div>
+    </footer>
+}
+
+    @* ============================================================
+       CMD+K Komut Paleti
+       ============================================================ *@
+    <div class="kbar" id="kbar" hidden role="dialog" aria-label="Komut paleti" aria-modal="true">
+        <div class="kbar-backdrop" data-close></div>
+        <div class="kbar-panel" role="document">
+            <div class="kbar-input-wrap">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6" fill="none" />
+                    <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+                <input type="text" id="kbar-input" placeholder="@(currentCulture == "en" ? "Search pages, actions, commands…" : "Sayfa, eylem veya komut ara…")" autocomplete="off" spellcheck="false" />
+                <kbd class="kbar-esc">ESC</kbd>
+            </div>
+            <ul class="kbar-list" id="kbar-list" role="listbox"></ul>
+            <div class="kbar-footer">
+                <span><kbd>↑</kbd><kbd>↓</kbd> gezin</span>
+                <span><kbd>↵</kbd> aç</span>
+                <span><kbd>esc</kbd> kapat</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
+
+@* admin inline editor kaldırıldı (siteyi yayına alırken admin tamamen sökülmüş durumda) *@
+@*
+@if (false)
+{
+    <script>
+    (() => {
+        // ---- removed ----
+        const body = document.body;
+        const toast = document.getElementById('edit-toast');
+        const toggle = document.getElementById('ab-edit-toggle');
+        const STORAGE_KEY = 'creida-edit-on';
+
+        // İlk yüklemede önceki tercihi geri yükle
+        if (localStorage.getItem(STORAGE_KEY) === '1') {
+            toggle.checked = true;
+            body.classList.add('edit-on');
+        }
+
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) {
+                body.classList.add('edit-on');
+                localStorage.setItem(STORAGE_KEY, '1');
+                showToast('Düzenleme modu açık — yazılara tıkla, değiştir.');
+                wireEditables();
+            } else {
+                body.classList.remove('edit-on');
+                localStorage.removeItem(STORAGE_KEY);
+                document.querySelectorAll('[data-edit]').forEach(el => el.contentEditable = 'false');
+                showToast('Düzenleme modu kapalı.');
+            }
+        });
+
+        function showToast(msg, isErr) {
+            toast.textContent = msg;
+            toast.classList.toggle('err', !!isErr);
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 2400);
+        }
+
+        function parseEdit(raw) {
+            // Biçim: "collection.field" veya "collection.field#id"
+            const hashIdx = raw.indexOf('#');
+            const id = hashIdx >= 0 ? raw.slice(hashIdx + 1) : null;
+            const core = hashIdx >= 0 ? raw.slice(0, hashIdx) : raw;
+            const dotIdx = core.indexOf('.');
+            if (dotIdx < 0) return null;
+            return { collection: core.slice(0, dotIdx), field: core.slice(dotIdx + 1), id };
+        }
+
+        async function save(el) {
+            const parsed = parseEdit(el.dataset.edit);
+            if (!parsed) return;
+            const value = el.innerText.replace(/ /g, ' ').trim();
+            // İlk kaydını tut, değişmemişse network'e gitmeyelim
+            if (el.dataset.lastValue === value) return;
+            el.dataset.lastValue = value;
+            try {
+                const res = await fetch('/admin/api/inline', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ collection: parsed.collection, field: parsed.field, value, id: parsed.id })
+                });
+                if (!res.ok) {
+                    const data = await res.json().catch(() => ({}));
+                    showToast('Kaydedilemedi: ' + (data.error || res.status), true);
+                    return;
+                }
+                showToast('✓ Kaydedildi');
+            } catch (e) {
+                showToast('Bağlantı hatası', true);
+            }
+        }
+
+        function wireEditables() {
+            document.querySelectorAll('[data-edit]').forEach(el => {
+                if (el.dataset.wired === '1') {
+                    el.contentEditable = 'true';
+                    return;
+                }
+                el.dataset.wired = '1';
+                el.contentEditable = 'true';
+                el.dataset.lastValue = el.innerText.replace(/ /g, ' ').trim();
+
+                // Linkleri tıklanamaz yap edit modda — yoksa düzenlerken siteye götürür
+                if (el.tagName === 'A') {
+                    el.addEventListener('click', (e) => { if (body.classList.contains('edit-on')) e.preventDefault(); });
+                }
+                el.addEventListener('blur', () => save(el));
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey && el.tagName !== 'TEXTAREA') {
+                        e.preventDefault();
+                        el.blur();
+                    }
+                    if (e.key === 'Escape') {
+                        // İptal — eski değere dön
+                        el.innerText = el.dataset.lastValue || '';
+                        el.blur();
+                    }
+                });
+            });
+        }
+
+        // Mod kapalıyken bile dinleyicileri bağla; toggle açılınca contentEditable aç/kapa
+        wireEditables();
+    })();
+    </script>
+}
+*@
+</body>
+</html>

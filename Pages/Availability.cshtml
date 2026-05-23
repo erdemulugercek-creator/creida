@@ -1,0 +1,83 @@
+@page "/availability"
+@{
+    ViewData["Title"] = "Müsaitlik — Creida";
+}
+
+@{
+    var slots = new[]
+    {
+        new { Month = "Nisan 2026", Status = "Açık",   Count = "2 yeni proje slotu", Note = "Marka kimliği veya kampanya için ideal." },
+        new { Month = "Mayıs 2026", Status = "Açık",   Count = "1 yeni proje slotu", Note = "Performans-ağırlıklı projelere öncelik." },
+        new { Month = "Haziran",    Status = "Dolu",   Count = "0",                  Note = "Mevcut müşteri taahhütleriyle dolu." },
+        new { Month = "Temmuz",     Status = "Açık",   Count = "2 yeni proje slotu", Note = "Yaz dönemi lansman projeleri için." },
+        new { Month = "Ağustos",    Status = "Sınırlı", Count = "1 yeni proje slotu", Note = "Sadece 360° anlaşmalara açık." },
+        new { Month = "Eylül",      Status = "Açık",   Count = "3 yeni proje slotu", Note = "Q4 lansmanları için ideal zaman." }
+    };
+}
+
+<section class="press-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Müsaitlik takvimi</span>
+                <h1 class="display press-headline">
+                    Önümüzdeki<br />
+                    <span class="italic accent">altı ay.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Yıl boyunca yaklaşık 14 paralel proje yürütüyoruz. Doğru sayıyı tutmak,
+                kalite için kritik; bu yüzden ayın slotları dolduğunda yenisini bekletmiyor,
+                ileri ayı öneriyoruz. Aşağıdaki rakamlar canlıdır, ayda bir el ile güncellenir.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="availability-list-section">
+    <div class="container">
+        <ul class="availability-list reveal-stagger">
+            @foreach (var s in slots)
+            {
+                var statusClass = s.Status == "Dolu" ? "is-full" : (s.Status == "Sınırlı" ? "is-limited" : "is-open");
+                <li class="availability-row">
+                    <div class="avail-month">@s.Month</div>
+                    <div class="avail-status @statusClass">
+                        <span class="avail-status-dot"></span>
+                        <span>@s.Status</span>
+                    </div>
+                    <div class="avail-count">@s.Count</div>
+                    <div class="avail-note muted">@s.Note</div>
+                </li>
+            }
+        </ul>
+
+        <p class="press-disclaimer">
+            "Açık" demek mevcut ekibin bir proje için kapasitesinin var olduğu demek;
+            anlaşma gibi anlamına gelmez. Karar verici görüşmesi için brief gönderdikten
+            sonra 48 saat içinde slot rezerve ediliyor.
+        </p>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Uygun bir ay gördüysen</span>
+                <h2 class="display contact-headline">
+                    Hadi <span class="italic accent">başlayalım.</span>
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Brief'i bize gönder; ilgili ayın slotunu sana 48 saat boyunca opsiyonda tutarız.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="/#contact">Brief gönder</a>
+                    <a class="cta-button" href="/brief">Brief sihirbazını dene</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

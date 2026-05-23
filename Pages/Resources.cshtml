@@ -1,0 +1,82 @@
+@page "/resources"
+@{
+    ViewData["Title"] = "Kaynaklar — Creida";
+}
+
+@{
+    var templates = new[]
+    {
+        new {
+            Title = "Brand brief şablonu",
+            Body = "İki günde brief yazmak için kullandığımız doküman. Karar verici görüşmesi soruları, müşteri görüşme rehberi, brief iskeleti.",
+            Size = "PDF · 1.2 MB",
+            File = "/downloads/creida-brand-brief-template.pdf"
+        },
+        new {
+            Title = "Marka stratejisi kanvası",
+            Body = "Tek sayfada konumlandırma, mesaj mimarisi, ses tonu ve kaçınılması gerekenleri haritalamak için A3 boyutunda baskıya hazır şablon.",
+            Size = "PDF · 800 KB",
+            File = "/downloads/creida-brand-canvas.pdf"
+        },
+        new {
+            Title = "Performance audit checklist",
+            Body = "Mevcut dijital kampanyalarınızı 90 dakikada değerlendirmek için 42 maddelik kontrol listesi. Attribution, kreatif, landing, bütçe.",
+            Size = "PDF · 480 KB",
+            File = "/downloads/creida-performance-audit.pdf"
+        },
+        new {
+            Title = "Ajans-müşteri ritim önerisi",
+            Body = "Haftalık, iki haftalık ve aylık toplantı yapıları + onay süreçleri. Notion-uyumlu template.",
+            Size = "PDF + Notion · 240 KB",
+            File = "/downloads/creida-rhythm-template.pdf"
+        }
+    };
+}
+
+<section class="press-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Kaynaklar</span>
+                <h1 class="display press-headline">
+                    Birlikte kullandığımız<br />
+                    <span class="italic accent">şablonlar.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Müşterilerimizle çalışırken kullandığımız brief, strateji ve audit şablonlarını
+                ücretsiz indirebilirsiniz. Karşılığında bir şey beklemiyoruz; e-posta listemize
+                eklemiyoruz, takip kodu koymuyoruz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="press-downloads">
+    <div class="container">
+        <ul class="resources-list reveal-stagger">
+            @foreach (var t in templates)
+            {
+                <li>
+                    <article class="resource-card">
+                        <div class="resource-text">
+                            <h3>@t.Title</h3>
+                            <p>@t.Body</p>
+                            <span class="resource-meta">@t.Size</span>
+                        </div>
+                        <a class="cta-button" href="@t.File" download>
+                            <span>İndir</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                                <path d="M12 4v14M6 12l6 6 6-6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </article>
+                </li>
+            }
+        </ul>
+        <p class="press-disclaimer">
+            Dosyalar yakında. Şu an erken erişim için <a href="mailto:hello@creida.co" class="link-underline">hello@creida.co</a>'ya yazın,
+            taslakları doğrudan göndereyim.
+        </p>
+    </div>
+</section>

@@ -1,0 +1,410 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Creida — Brand & Performance Ad Agency";
+    var calLink = AppConfig["Booking:CalLink"];
+}
+
+@*
+  ============================================================
+  HERO
+  ============================================================
+*@
+<section class="hero">
+    <svg class="hero-bg-mark" viewBox="235 405 195 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M332.67,598.96l-3.54.18v-89.07s-88.65,0-88.65,0l-.05-3.24,31.78-.12c7.94-.03,15.48-1.62,22.76-4.48,11.68-4.59,20.83-12.92,26.61-24.07,4.83-9.31,7.5-19.47,7.52-30.08l.05-30.19,3.52-.03v88.96s88.85,0,88.85,0l.03,3.22-29.5.09c-22.76.07-41.28,10.74-51.34,31.32-4.76,9.74-7.89,20.33-7.93,31.24l-.1,26.25Z" fill="currentColor" />
+    </svg>
+
+    <div class="container hero-inner">
+
+        <div class="hero-meta reveal">
+            <p class="meta-side">@L["Hero.MetaSide"]</p>
+        </div>
+
+        <h1 class="display hero-headline reveal">
+            <span class="line" data-edit="settings.HeroLine1">@Model.Site.HeroLine1</span>
+            <span class="line italic accent" data-edit="settings.HeroLine2">@Model.Site.HeroLine2</span>
+        </h1>
+
+        <div class="hero-tail reveal">
+            <p data-edit="settings.HeroSubtitle">@Model.Site.HeroSubtitle</p>
+            <div class="hero-bottom">
+                <a class="cta-button cta-button--big cta-primary" href="@Model.Site.HeroCtaPrimaryHref">
+                    <span data-edit="settings.HeroCtaPrimaryLabel">@Model.Site.HeroCtaPrimaryLabel</span>
+                    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@*
+  ============================================================
+  SERVICES
+  ============================================================
+*@
+<section class="services" id="services">
+    <div class="container">
+
+        <header class="section-head reveal">
+            <div>
+                <span class="eyebrow">@L["Section.Services"]</span>
+                <h2 class="section-title">@L["Services.Title1"]<br /><span class="italic accent">@L["Services.Title2"]</span> @L["Services.Title3"]</h2>
+            </div>
+        </header>
+
+        <ol class="services-list reveal-stagger">
+
+            <li class="service-row">
+                <div class="container service-row-inner" style="padding-left:0;padding-right:0;">
+                    <div class="service-num">01</div>
+                    <h3 class="service-title">Marka &amp; Kimlik</h3>
+                    <p class="service-desc">
+                        Strateji, isimlendirme, görsel kimlik, ses tonu ve marka rehberi.
+                        Markanızın 10 yıl sonra da ayakta kalacak iskeletini kurarız.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Strateji</span>
+                        <span class="service-tag">Identity</span>
+                    </div>
+                </div>
+            </li>
+
+            <li class="service-row">
+                <div class="container service-row-inner" style="padding-left:0;padding-right:0;">
+                    <div class="service-num">02</div>
+                    <h3 class="service-title">Kreatif Kampanya</h3>
+                    <p class="service-desc">
+                        Büyük fikir, çok kanallı kampanya, açık hava, dijital ve sosyal medya
+                        konseptlerinin entegre tasarımı ve prodüksiyonu.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">360°</span>
+                        <span class="service-tag">Konsept</span>
+                    </div>
+                </div>
+            </li>
+
+            <li class="service-row">
+                <div class="container service-row-inner" style="padding-left:0;padding-right:0;">
+                    <div class="service-num">03</div>
+                    <h3 class="service-title">Dijital Reklam</h3>
+                    <p class="service-desc">
+                        Meta, Google, TikTok ve LinkedIn üzerinde medya planlama, satın alma
+                        ve kreatif iterasyonu. Bütçeniz boşa harcanmaz.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Meta</span>
+                        <span class="service-tag">Google</span>
+                        <span class="service-tag">TikTok</span>
+                    </div>
+                </div>
+            </li>
+
+            <li class="service-row">
+                <div class="container service-row-inner" style="padding-left:0;padding-right:0;">
+                    <div class="service-num">04</div>
+                    <h3 class="service-title">Performans</h3>
+                    <p class="service-desc">
+                        CRO, A/B test, landing page tasarımı, attribution kurulumu ve
+                        dönüşüm odaklı kreatif. Her TL'yi ölçeriz.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">CRO</span>
+                        <span class="service-tag">A/B Test</span>
+                    </div>
+                </div>
+            </li>
+
+            <li class="service-row">
+                <div class="container service-row-inner" style="padding-left:0;padding-right:0;">
+                    <div class="service-num">05</div>
+                    <h3 class="service-title">İçerik &amp; Film</h3>
+                    <p class="service-desc">
+                        Film, fotoğraf, sosyal medya içerikleri ve UGC. Konsepten teslime
+                        kadar tek elden, ajansın kreatif diline sadık prodüksiyon.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Film</span>
+                        <span class="service-tag">Sosyal</span>
+                    </div>
+                </div>
+            </li>
+
+            <li class="service-row">
+                <div class="container service-row-inner" style="padding-left:0;padding-right:0;">
+                    <div class="service-num">06</div>
+                    <h3 class="service-title">Veri &amp; Analiz</h3>
+                    <p class="service-desc">
+                        Dashboard kurulumu, kohort analizi, raporlama ritmi ve aksiyon
+                        önerileri. Rakamı gösteririz, ne yapacağımızı da söyleriz.
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Analytics</span>
+                        <span class="service-tag">Reporting</span>
+                    </div>
+                </div>
+            </li>
+
+        </ol>
+    </div>
+</section>
+
+@*
+  ============================================================
+  ABOUT
+  ============================================================
+*@
+<section class="about" id="about">
+    <div class="container">
+
+        <header class="section-head reveal">
+            <div>
+                <span class="eyebrow">@L["Section.About"]</span>
+                <h2 class="section-title">@L["About.Title1"]<br /><span class="italic accent">@L["About.Title2"]</span></h2>
+            </div>
+            <p class="lead">@L["About.Lead"]</p>
+        </header>
+
+        <div class="about-grid">
+
+            <div class="about-text reveal">
+                <p>
+                    2026'da <em>İstanbul</em>'da, iki ekibin ortak meselesiyle kurulduk:
+                </p>
+                <p>
+                    Markalara yatırım yapan girişimciler, kreatif ile performans arasında
+                    çeviri kaybı yaşıyor. Biz bu boşlukta duruyoruz.
+                </p>
+                <p>
+                    Bugün <em>8 kişilik</em> bağımsız bir ekibiz; stratejist, sanat
+                    yönetmeni, kopirayter, performans uzmanı ve analiz takımı aynı
+                    kanalda, aynı brief üzerinde çalışır.
+                </p>
+            </div>
+
+            <div class="principles reveal-stagger">
+                <div class="principle">
+                    <div class="principle-num">i</div>
+                    <div>
+                        <h4>Strateji önce gelir.</h4>
+                        <p>Tasarım da medya planı da, doğru cevabı bulmadan yapılırsa pahalı bir gürültüdür. Cevabı bulduktan sonra hızlanırız.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-num">ii</div>
+                    <div>
+                        <h4>Tek ekip, tek hesap.</h4>
+                        <p>İş birimleri arasında brief yolculuğu yok. Kreatif yönetmenle performans uzmanı aynı toplantıdadır.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-num">iii</div>
+                    <div>
+                        <h4>Rakam karanlıkta kalmaz.</h4>
+                        <p>Haftalık ritimle, anlaşılır dashboard'larla ve aksiyon önerileriyle çalışırız. Sürpriz raporlama yapmayız.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="metrics reveal-stagger">
+            <div class="metric">
+                <h5>20<sup>+</sup></h5>
+                <p>Yürütülen marka</p>
+            </div>
+            <div class="metric">
+                <h5>3.1×</h5>
+                <p>Ortalama ROAS artışı</p>
+            </div>
+            <div class="metric">
+                <h5>8</h5>
+                <p>Tam zamanlı ekip</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@*
+  ============================================================
+  CONTACT
+  ============================================================
+*@
+<section class="contact" id="contact">
+    <div class="container">
+
+        <header class="section-head reveal">
+            <div>
+                <span class="eyebrow">@L["Section.Contact"]</span>
+                <h2 class="display contact-headline">
+                    @L["Contact.Title1"] <span class="italic accent">@L["Contact.Title2"]</span><br />
+                    @L["Contact.Title3"]
+                </h2>
+            </div>
+            <p class="lead">@L["Contact.Lead"]</p>
+        </header>
+
+        <div class="contact-grid">
+
+            <div class="contact-form-wrap reveal">
+
+                @if (Model.Submitted)
+                {
+                    <div class="form-success" role="status">
+                        <span class="dot"></span>
+                        <div>
+                            <strong>@L["Contact.Success"]</strong><br />
+                            <span class="muted">@L["Contact.SuccessSub", Model.SubmittedName ?? ""]</span>
+                        </div>
+                    </div>
+                }
+
+                <form class="contact-form contact-form--steps" method="post" asp-page="/Index" novalidate data-steps="3">
+                    <div asp-validation-summary="ModelOnly" class="muted" style="font-size:13px;margin-bottom:8px;"></div>
+
+                    <div class="step-indicator">
+                        <span class="step-dot is-active" data-step="1">1</span>
+                        <span class="step-line"></span>
+                        <span class="step-dot" data-step="2">2</span>
+                        <span class="step-line"></span>
+                        <span class="step-dot" data-step="3">3</span>
+                    </div>
+
+                    @* Adım 1: Kim *@
+                    <fieldset class="form-step is-current" data-step="1">
+                        <legend class="step-legend">
+                            <span class="step-num">01</span>
+                            <span class="step-title">Sen kimsin?</span>
+                        </legend>
+
+                        <div class="field">
+                            <label for="Form_Name">@L["Contact.Form.Name"]</label>
+                            <input id="Form_Name" asp-for="Form.Name" placeholder="@L["Contact.Form.NamePh"]" autocomplete="name" data-required />
+                            <span asp-validation-for="Form.Name" class="validation"></span>
+                        </div>
+
+                        <div class="field">
+                            <label for="Form_Email">@L["Contact.Form.Email"]</label>
+                            <input id="Form_Email" asp-for="Form.Email" type="email" placeholder="@L["Contact.Form.EmailPh"]" autocomplete="email" data-required />
+                            <span asp-validation-for="Form.Email" class="validation"></span>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="cta-button cta-button--big" data-next>
+                                <span>Devam et</span>
+                                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    @* Adım 2: Marka *@
+                    <fieldset class="form-step" data-step="2">
+                        <legend class="step-legend">
+                            <span class="step-num">02</span>
+                            <span class="step-title">Markan ne?</span>
+                        </legend>
+
+                        <div class="field">
+                            <label for="Form_Company">@L["Contact.Form.Company"]</label>
+                            <input id="Form_Company" asp-for="Form.Company" placeholder="@L["Contact.Form.CompanyPh"]" autocomplete="organization" />
+                            <span asp-validation-for="Form.Company" class="validation"></span>
+                        </div>
+
+                        <div class="field">
+                            <label for="Form_Service">@L["Contact.Form.Service"]</label>
+                            <select id="Form_Service" asp-for="Form.Service">
+                                <option value="">—</option>
+                                <option value="Marka &amp; Kimlik">Marka &amp; Kimlik</option>
+                                <option value="Kreatif Kampanya">Kreatif Kampanya</option>
+                                <option value="Dijital Reklam">Dijital Reklam</option>
+                                <option value="Performans Pazarlaması">Performans Pazarlaması</option>
+                                <option value="İçerik &amp; Prodüksiyon">İçerik &amp; Prodüksiyon</option>
+                                <option value="360°">360°</option>
+                            </select>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="cta-button" data-prev>Geri</button>
+                            <button type="button" class="cta-button cta-button--big" data-next>
+                                <span>Son adım</span>
+                                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    @* Adım 3: Ne istiyorsun *@
+                    <fieldset class="form-step" data-step="3">
+                        <legend class="step-legend">
+                            <span class="step-num">03</span>
+                            <span class="step-title">Ne istiyorsun?</span>
+                        </legend>
+
+                        <div class="field">
+                            <label for="Form_Message">@L["Contact.Form.Message"]</label>
+                            <textarea id="Form_Message" asp-for="Form.Message" placeholder="@L["Contact.Form.MessagePh"]" data-required></textarea>
+                            <span asp-validation-for="Form.Message" class="validation"></span>
+                        </div>
+
+                        <div class="contact-submit">
+                            <p>@L["Contact.Form.Privacy"]</p>
+                            <div class="step-actions">
+                                <button type="button" class="cta-button" data-prev>Geri</button>
+                                <button type="submit" class="cta-button cta-button--big">
+                                    <span>@L["Contact.Form.Submit"]</span>
+                                    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+
+            <aside class="contact-side reveal">
+                @if (!string.IsNullOrEmpty(calLink))
+                {
+                    <div class="block contact-cal">
+                        <h5>Doğrudan rezervasyon</h5>
+                        <p>
+                            <a href="https://cal.com/@calLink" target="_blank" rel="noopener">
+                                30 dakikalık keşif görüşmesi
+                            </a>
+                        </p>
+                        <p class="note">Form yerine doğrudan takvimden saat seç.</p>
+                    </div>
+                }
+                <div class="block">
+                    <h5>Yazın</h5>
+                    <p><a href="mailto:hello@creida.co">hello@creida.co</a></p>
+                    <p class="note">Yeni iş ve genel sorular için.</p>
+                </div>
+                <div class="block">
+                    <h5>Stüdyo</h5>
+                    <p>Kadıköy<br />İstanbul</p>
+                    <p class="note">Pzt — Cum, 10:00 – 19:00</p>
+                </div>
+                <div class="block">
+                    <h5>Telefon</h5>
+                    <p><a href="tel:+905316062094">+90 531 606 20 94</a></p>
+                </div>
+                <div class="block">
+                    <h5>Kariyer</h5>
+                    <p><a href="mailto:careers@creida.co">careers@creida.co</a></p>
+                </div>
+            </aside>
+
+        </div>
+
+    </div>
+</section>

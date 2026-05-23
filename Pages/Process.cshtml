@@ -1,0 +1,149 @@
+@page "/process"
+@{
+    ViewData["Title"] = "Çalışma şeklimiz — Creida";
+}
+
+@{
+    var phases = new[]
+    {
+        new {
+            Num = "01",
+            Name = "Keşif",
+            Duration = "1–2 hafta",
+            Lead = "Doğru soruyu sormadan kreatife geçmeyiz.",
+            Body = "Karar verici görüşmesi, 3-5 müşteri konuşması, kategori taraması, mevcut iletişim auditi. Hedef: brief'in iskeletini iki günde yazmaya hazır olmak. Çıktı: 12 sayfalık keşif notu, açık riskler ve fırsatlar.",
+            Items = new[] {
+                "Karar verici 90 dk derinlemesine",
+                "3-5 müşteri görüşmesi",
+                "Mevcut iletişim auditi",
+                "Kategori + rakip taraması"
+            }
+        },
+        new {
+            Num = "02",
+            Name = "Strateji",
+            Duration = "2–3 hafta",
+            Lead = "Marka konumlandırması, mesaj mimarisi, başarı ölçüsü.",
+            Body = "Brief'i strateji dokümanına dönüştürürüz. Konum cümlesi, mesaj mimarisi (alıcı kişisine göre), kanal stratejisi ve KPI tablosu. Her şey, üzerinde anlaşılan ölçü etrafında. Bu dokümanı CEO onaylamadan kreatife geçmeyiz.",
+            Items = new[] {
+                "Konumlandırma cümlesi",
+                "Mesaj mimarisi (3 katman)",
+                "Kanal-bütçe önerisi",
+                "Brand health + business KPI"
+            }
+        },
+        new {
+            Num = "03",
+            Name = "Kreatif",
+            Duration = "3–6 hafta",
+            Lead = "Stratejiyi gözle görülür, dokunulur hale getiririz.",
+            Body = "Sanat yönetmeni + stratejist + kopirayter + performans uzmanı aynı odada başlar. Her brief'e 2-3 yön çıkar; en güçlüsü detaylandırılır. Tasarım iterasyonu üç turdan fazla sürmez; üçüncü turdan sonra brief'te problem var demektir.",
+            Items = new[] {
+                "Konsept atölyesi (yarım gün, ekip + müşteri)",
+                "İki yön, üç tur iterasyon",
+                "Prodüksiyon planı + maliyet",
+                "Performans varyant şablonları"
+            }
+        },
+        new {
+            Num = "04",
+            Name = "Prodüksiyon",
+            Duration = "Brief'e göre 1–4 hafta",
+            Lead = "Film, fotoğraf, ambalaj, web, ne gerekiyorsa.",
+            Body = "Kendi prodüksiyon ekibimiz ve sektörden seçtiğimiz iş birlikçilerle (yönetmen, fotoğrafçı, müzik) çalışırız. Müşteri her aşamada ön izleme görür; sürpriz teslim olmaz.",
+            Items = new[] {
+                "Yönetmen / fotoğrafçı seçimi",
+                "Ön izleme + müşteri onayları",
+                "Çekim ve post prodüksiyon",
+                "Tüm format teslim seti"
+            }
+        },
+        new {
+            Num = "05",
+            Name = "Lansman + optimizasyon",
+            Duration = "Sürekli",
+            Lead = "Bir kampanya canlıya çıktığı gün başlar.",
+            Body = "Lansman sonrası 90 gün haftalık ritimle çalışırız: kreatif performans okuma, varyant rotasyonu, kanal-bütçe optimizasyonu, A/B testleri. 90 gün sonra ay-be-ay raporlamaya geçilir; kampanya tamamlandığında brand lift / incrementality raporu yazılır.",
+            Items = new[] {
+                "Haftalık dashboard + standup",
+                "Kreatif rotasyonu (iki haftada bir)",
+                "Landing CRO testleri",
+                "90 gün sonu lift raporu"
+            }
+        }
+    };
+}
+
+<section class="process-page-hero">
+    <div class="container">
+        <div class="process-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Çalışma şeklimiz</span>
+                <h1 class="display process-headline">
+                    Beş aşama.<br />
+                    <span class="italic accent">Aynı ekip.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Brief'in ilk gününden lansman sonrası 90. güne kadar
+                aynı stratejist + kreatif yönetmen + performans uzmanı sizinle çalışır.
+                Süreçte el değiştiren brief yoktur.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="process-phases">
+    <div class="container">
+        <div class="phases-list reveal-stagger">
+            @foreach (var p in phases)
+            {
+                <div class="phase">
+                    <div class="phase-meta">
+                        <span class="phase-num">@p.Num</span>
+                        <span class="phase-duration">@p.Duration</span>
+                    </div>
+                    <div class="phase-body">
+                        <h2 class="phase-name">@p.Name</h2>
+                        <p class="phase-lead italic accent">@p.Lead</p>
+                        <p class="phase-text">@p.Body</p>
+                        <ul class="phase-items">
+                            @foreach (var item in p.Items)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Başlamaya hazır mısın?</span>
+                <h2 class="display contact-headline">
+                    Bir <span class="italic accent">brief</span><br />
+                    yeter.
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Brief gönderdikten sonra 48 saat içinde aynı kişi
+                    size döner. Karar verici görüşmesi için iki tarih önerir.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="/#contact">
+                        <span>Brief gönder</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

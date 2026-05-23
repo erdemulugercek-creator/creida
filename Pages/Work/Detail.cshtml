@@ -1,0 +1,303 @@
+@page "/work/{slug}"
+@using Creida.Data
+@model Creida.Pages.Work.DetailModel
+@{
+    ViewData["Title"] = $"{Model.Case.Brand} — Creida";
+}
+
+<article class="case">
+
+    @* Sticky side nav — sağda küçük dot navigation *@
+    <nav class="case-sidenav" aria-label="Case study sections">
+        <a href="#case-intro" data-label="Giriş"><span class="case-sidenav-dot"></span></a>
+        <a href="#case-info" data-label="Bilgi"><span class="case-sidenav-dot"></span></a>
+        <a href="#case-story" data-label="Mesele · Yaklaşım · Sonuç"><span class="case-sidenav-dot"></span></a>
+        <a href="#case-process-section" data-label="Süreç"><span class="case-sidenav-dot"></span></a>
+        <a href="#case-quote-section" data-label="Söz"><span class="case-sidenav-dot"></span></a>
+        <a href="#case-metrics-section" data-label="Sonuç"><span class="case-sidenav-dot"></span></a>
+        <a href="#case-credits-section" data-label="Ekip"><span class="case-sidenav-dot"></span></a>
+    </nav>
+
+    @* ============================================================
+       HERO
+       ============================================================ *@
+    <section class="case-hero" id="case-intro">
+        <div class="container">
+            <a class="case-back" href="/#work">
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path d="M19 12H5M11 6L5 12l6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Tüm işler</span>
+            </a>
+
+            <div class="case-hero-grid reveal">
+                <div>
+                    <span class="eyebrow">@Model.Case.Category</span>
+                    <h1 class="display case-title">@Model.Case.Brand</h1>
+                    <p class="case-tagline italic accent">"@Model.Case.Tagline"</p>
+                </div>
+                <div class="case-lede">
+                    <p>@Model.Case.Lede</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="case-hero-image reveal">
+            <img src="@Model.Case.HeroImage" alt="@Model.Case.Brand kapak görseli" loading="eager" />
+        </div>
+    </section>
+
+    @* ============================================================
+       TL;DR — "Bakışta" özet kutusu
+       ============================================================ *@
+    @{
+        // Sections[0/1/2] = Mesele / Yaklaşım / Sonuç
+        // Her birinden ilk cümleyi al — okuma süresi 15 saniyeye iner
+        string FirstSentence(string body)
+        {
+            if (string.IsNullOrEmpty(body)) return "";
+            var idx = body.IndexOfAny(new[] { '.', '!', '?' });
+            return idx > 0 ? body.Substring(0, idx + 1) : body;
+        }
+        var sections = Model.Case.Sections.ToList();
+    }
+    @if (sections.Count >= 3)
+    {
+        <section class="case-tldr reveal">
+            <div class="container">
+                <div class="tldr-card">
+                    <span class="tldr-label">Bakışta</span>
+                    <ul class="tldr-list">
+                        <li><span class="tldr-key">Mesele —</span> @FirstSentence(sections[0].Body)</li>
+                        <li><span class="tldr-key">Yaklaşım —</span> @FirstSentence(sections[1].Body)</li>
+                        <li><span class="tldr-key">Sonuç —</span> @FirstSentence(sections[2].Body)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    }
+
+    @* ============================================================
+       INFO BAR
+       ============================================================ *@
+    <section class="case-info" id="case-info">
+        <div class="container case-info-grid reveal">
+            <div class="case-info-block">
+                <h5>Müşteri</h5>
+                <p>@Model.Case.Brand</p>
+            </div>
+            <div class="case-info-block">
+                <h5>Sektör</h5>
+                <p>@Model.Case.Industry</p>
+            </div>
+            <div class="case-info-block">
+                <h5>Yıl</h5>
+                <p>@Model.Case.Year</p>
+            </div>
+            <div class="case-info-block">
+                <h5>Süre</h5>
+                <p>@Model.Case.Duration</p>
+            </div>
+            <div class="case-info-block case-info-block--wide">
+                <h5>Hizmetler</h5>
+                <div class="case-services">
+                    @foreach (var s in Model.Case.Services)
+                    {
+                        <span class="service-tag">@s</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @* ============================================================
+       PROBLEM / APPROACH / RESULT
+       ============================================================ *@
+    <section class="case-body" id="case-story">
+        <div class="container">
+            <div class="case-sections reveal-stagger">
+                @{int caseIndex = 0;}
+                @foreach (var item in Model.Case.Sections)
+                {
+                    caseIndex++;
+                    <div class="case-section">
+                        <div class="case-section-num">0@(caseIndex)</div>
+                        <div class="case-section-text">
+                            <h2>@item.Heading</h2>
+                            <p>@item.Body</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    @* ============================================================
+       FIRST GALLERY IMAGE (büyük)
+       ============================================================ *@
+    @if (Model.Case.Gallery.Count > 0)
+    {
+        <section class="case-gallery-wide reveal">
+            <div class="container">
+                <figure>
+                    <img src="@Model.Case.Gallery[0].Url" alt="@Model.Case.Gallery[0].Caption" loading="lazy" />
+                    <figcaption>@Model.Case.Gallery[0].Caption</figcaption>
+                </figure>
+            </div>
+        </section>
+    }
+
+    @* ============================================================
+       PROCESS / SÜREÇ
+       ============================================================ *@
+    <section class="case-process" id="case-process-section">
+        <div class="container">
+            <header class="section-head reveal">
+                <div>
+                    <span class="eyebrow">Süreç</span>
+                    <h2 class="section-title">Nasıl <span class="italic accent">yaptık.</span></h2>
+                </div>
+                <p class="lead">
+                    Brief'in ilk gününden teslime kadar dört temel aşama.
+                    Her aşama bir önceki kararı sınar, bir sonrakini hazırlar.
+                </p>
+            </header>
+
+            <div class="process-grid reveal-stagger">
+                @foreach (var step in Model.Case.Process)
+                {
+                    <div class="process-card">
+                        <span class="process-num">@step.Number</span>
+                        <h3>@step.Title</h3>
+                        <p>@step.Body</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    @* ============================================================
+       İKİNCİ GALLERY (iki sütun)
+       ============================================================ *@
+    @if (Model.Case.Gallery.Count >= 3)
+    {
+        <section class="case-gallery-pair reveal">
+            <div class="container case-gallery-pair-grid">
+                <figure>
+                    <img src="@Model.Case.Gallery[1].Url" alt="@Model.Case.Gallery[1].Caption" loading="lazy" />
+                    <figcaption>@Model.Case.Gallery[1].Caption</figcaption>
+                </figure>
+                <figure>
+                    <img src="@Model.Case.Gallery[2].Url" alt="@Model.Case.Gallery[2].Caption" loading="lazy" />
+                    <figcaption>@Model.Case.Gallery[2].Caption</figcaption>
+                </figure>
+            </div>
+        </section>
+    }
+
+    @* ============================================================
+       PULL QUOTE
+       ============================================================ *@
+    <section class="case-quote" id="case-quote-section">
+        <div class="container">
+            <blockquote class="reveal">
+                <svg class="quote-mark" viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M6 20q0-8 8-12l2 4q-4 2-5 6h3v8H6v-6zm12 0q0-8 8-12l2 4q-4 2-5 6h3v8h-8v-6z" fill="currentColor" />
+                </svg>
+                <p>@Model.Case.Quote.Body</p>
+                <footer>
+                    <span class="quote-name">@Model.Case.Quote.Author</span>
+                    <span class="quote-role">@Model.Case.Quote.Role</span>
+                </footer>
+            </blockquote>
+        </div>
+    </section>
+
+    @* ============================================================
+       METRİKLER
+       ============================================================ *@
+    <section class="case-metrics" id="case-metrics-section">
+        <div class="container">
+            <header class="section-head reveal" style="grid-template-columns: 1fr; margin-bottom: clamp(40px,5vw,72px);">
+                <div>
+                    <span class="eyebrow">Sonuç</span>
+                    <h2 class="section-title">Rakamla <span class="italic accent">söyleyince.</span></h2>
+                </div>
+            </header>
+
+            <div class="metrics reveal-stagger">
+                @foreach (var m in Model.Case.Metrics)
+                {
+                    <div class="metric">
+                        <h5>@m.Value</h5>
+                        <p>@m.Label</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    @* ============================================================
+       EKİP / CREDITS
+       ============================================================ *@
+    <section class="case-credits" id="case-credits-section">
+        <div class="container">
+            <header class="section-head reveal" style="grid-template-columns: 1fr; margin-bottom: clamp(40px,5vw,72px);">
+                <div>
+                    <span class="eyebrow">Ekip</span>
+                    <h2 class="section-title">Bu işi <span class="italic accent">yapanlar.</span></h2>
+                </div>
+            </header>
+
+            <ul class="credits-list reveal-stagger">
+                @foreach (var credit in Model.Case.Credits)
+                {
+                    <li>
+                        <span class="credit-role">@credit.Role</span>
+                        <span class="credit-names">@credit.Names</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+
+    @* ============================================================
+       NEXT CASE
+       ============================================================ *@
+    @if (Model.Next is not null)
+    {
+        <section class="case-next">
+            <div class="container">
+                <a class="case-next-link" href="/work/@Model.Next.Slug">
+                    <span class="eyebrow">Sıradaki iş</span>
+                    <h3 class="display">@Model.Next.Brand</h3>
+                    <p class="muted">@Model.Next.Category</p>
+                    <span class="case-next-arrow" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+    }
+
+    @* ============================================================
+       CTA
+       ============================================================ *@
+    <section class="contact" id="contact-mini">
+        <div class="container">
+            <header class="section-head reveal" style="grid-template-columns:1fr;">
+                <div>
+                    <span class="eyebrow">Bir sonraki iş seninki olabilir.</span>
+                    <h2 class="display contact-headline">Bir <span class="italic accent">brief</span><br />yeter.</h2>
+                </div>
+            </header>
+            <a class="cta-button cta-button--big" href="/#contact">
+                <span>Brief gönder</span>
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+</article>

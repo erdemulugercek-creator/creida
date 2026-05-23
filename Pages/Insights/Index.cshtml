@@ -1,0 +1,56 @@
+@page "/insights"
+@model Creida.Pages.Insights.IndexModel
+@{
+    ViewData["Title"] = "Insights — Creida";
+}
+
+<section class="insights-hero">
+    <div class="container">
+        <div class="insights-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Insights · Notlar</span>
+                <h1 class="display insights-headline">
+                    Düşündüğümüz<br />
+                    <span class="italic accent">şeyler.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Strateji, kreatif, performans ve veri üstüne yazdığımız kısa parçalar.
+                Müşteri toplantılarında defalarca anlattığımız şeyleri buraya not düşüyoruz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="insights-list-section">
+    <div class="container">
+        @if (Model.Posts.Count == 0)
+        {
+            <p class="muted">Henüz yazı yok. Yakında.</p>
+        }
+        else
+        {
+            <ul class="insights-list reveal-stagger">
+                @foreach (var post in Model.Posts)
+                {
+                    <li>
+                        <a class="insight-row" href="/insights/@post.Meta.Slug">
+                            <div class="insight-row-meta">
+                                <span class="insight-date">@post.Meta.Date.ToString("dd.MM.yyyy")</span>
+                                <span class="insight-category">@post.Meta.Category</span>
+                            </div>
+                            <div class="insight-row-text">
+                                <h2>@post.Meta.Title</h2>
+                                <p>@post.Meta.Subtitle</p>
+                                <span class="insight-author">@post.Meta.Author · @post.Meta.ReadingTime</span>
+                            </div>
+                            <span class="insight-arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            </span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</section>

@@ -1,0 +1,135 @@
+@page "/sectors/{slug}"
+@using Creida.Data
+@model Creida.Pages.Sectors.DetailModel
+@{
+    ViewData["Title"] = $"{Model.Sector.Name} için reklam ajansı — Creida";
+}
+
+<section class="sector-hero">
+    <div class="container">
+        <a class="case-back" href="/#work">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                <path d="M19 12H5M11 6L5 12l6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>Tüm sektörler</span>
+        </a>
+
+        <div class="sector-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Sektör — @Model.Sector.Name</span>
+                <h1 class="display sector-headline">
+                    @Model.Sector.Headline1<br />
+                    <span class="italic accent">@Model.Sector.Headline2</span>
+                </h1>
+            </div>
+            <p class="lead">@Model.Sector.Lede</p>
+        </div>
+    </div>
+</section>
+
+<section class="sector-playbook">
+    <div class="container">
+        <header class="section-head reveal">
+            <div>
+                <span class="eyebrow">@Model.Sector.Name oyun planı</span>
+                <h2 class="section-title">Nasıl <span class="italic accent">yaklaşıyoruz.</span></h2>
+            </div>
+            <p class="lead">
+                Bu üç prensip, @Model.Sector.Name kategorisindeki tüm projelerimizin başında konuşulur.
+                Her brief'te buradan başlıyoruz.
+            </p>
+        </header>
+
+        <ol class="playbook-list reveal-stagger">
+            @{int pi = 0;}
+            @foreach (var p in Model.Sector.Playbook)
+            {
+                pi++;
+                <li class="playbook-item">
+                    <span class="playbook-num">0@(pi)</span>
+                    <div>
+                        <h3>@p.Title</h3>
+                        <p>@p.Body</p>
+                    </div>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+@if (Model.SectorCases.Count > 0)
+{
+    <section class="sector-cases">
+        <div class="container">
+            <header class="section-head reveal">
+                <div>
+                    <span class="eyebrow">@Model.Sector.Name işlerimiz</span>
+                    <h2 class="section-title">Bu kategoride <span class="italic accent">çalıştıklarımız.</span></h2>
+                </div>
+                <p class="lead">
+                    @Model.Sector.Name için yaptığımız case study'lerden bir kesit.
+                    Diğer kategorilerdeki çalışmalarımızı <a href="/#work" class="link-underline">tüm işlerden</a> görebilirsiniz.
+                </p>
+            </header>
+
+            <div class="work-grid">
+                @foreach (var c in Model.SectorCases)
+                {
+                    <a class="work-card" href="/work/@c.Slug">
+                        <div class="work-cover" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.65) 100%), url('@c.HeroImage');">
+                            <div class="work-cover-content">
+                                <span class="work-badge">@c.Badge</span>
+                                <span class="work-mark">@c.Mark</span>
+                            </div>
+                        </div>
+                        <div class="work-meta">
+                            <div>
+                                <h3>@c.Brand</h3>
+                                <span class="work-cat">@c.Category</span>
+                            </div>
+                            <span class="work-arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            </span>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<section class="sector-pricing">
+    <div class="container">
+        <div class="sector-pricing-grid reveal">
+            <div>
+                <span class="eyebrow">Bütçe aralığı</span>
+                <p class="sector-price-from">@Model.Sector.PriceFrom<sup>'den başlar</sup></p>
+                <p class="muted">
+                    @Model.Sector.Name kategorisindeki tipik proje aralığımız. Tam fiyat,
+                    brief'ten sonra netleşir. <a href="/pricing" class="link-underline">Tüm fiyat aralıkları</a>.
+                </p>
+            </div>
+            <a class="cta-button cta-button--big" href="/#contact">
+                <span>Brief gönder</span>
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="pricing-faq">
+    <div class="container">
+        <h2 class="section-subtitle">@Model.Sector.Name özelinde sorular</h2>
+        <dl class="faq-list reveal-stagger">
+            @foreach (var (q, a) in Model.Sector.Faq)
+            {
+                <div class="faq-item">
+                    <dt>@q</dt>
+                    <dd>@a</dd>
+                </div>
+            }
+        </dl>
+    </div>
+</section>

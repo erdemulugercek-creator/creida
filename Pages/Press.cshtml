@@ -1,0 +1,84 @@
+@page "/press"
+@{
+    ViewData["Title"] = "Basın — Creida";
+}
+
+@{
+    var assets = new[]
+    {
+        new { Title = "Logo paketi (SVG + PNG)",  Size = "240 KB", Format = "ZIP", File = "/downloads/creida-logo-pack.zip" },
+        new { Title = "Marka kitabı (PDF)",       Size = "4.6 MB", Format = "PDF", File = "/downloads/creida-brand-book.pdf" },
+        new { Title = "Stüdyo fotoğrafları",      Size = "18 MB",  Format = "ZIP", File = "/downloads/creida-studio-photos.zip" },
+        new { Title = "Kurucu portreleri",        Size = "12 MB",  Format = "ZIP", File = "/downloads/creida-founder-portraits.zip" },
+        new { Title = "Boilerplate metni",        Size = "8 KB",   Format = "TXT", File = "/downloads/creida-boilerplate.txt" }
+    };
+
+    var quickFacts = new[]
+    {
+        ("Kuruluş", "2024"),
+        ("Stüdyo", "Kadıköy, İstanbul"),
+        ("Ekip", "3 kurucu + 11 tam zamanlı"),
+        ("Sektör odakları", "DTC, B2B SaaS, FMCG, fintech, mobility"),
+        ("Hizmetler", "Marka, kreatif kampanya, dijital reklam, performans, içerik, veri")
+    };
+}
+
+<section class="press-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Basın</span>
+                <h1 class="display press-headline">
+                    Yazmak için<br />
+                    <span class="italic accent">yeterince var.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Logo, marka kitabı, stüdyo çekimleri ve kurucu portreleri aşağıda.
+                Sorularınız için <a href="mailto:press@creida.co" class="link-underline">press@creida.co</a>'ya yazın;
+                aynı iş günü dönüş yapıyoruz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="press-facts">
+    <div class="container">
+        <h2 class="section-subtitle">Hızlı bilgiler</h2>
+        <ul class="facts-list reveal-stagger">
+            @foreach (var (label, value) in quickFacts)
+            {
+                <li>
+                    <span class="fact-label">@label</span>
+                    <span class="fact-value">@value</span>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="press-downloads">
+    <div class="container">
+        <h2 class="section-subtitle">İndirilebilir varlıklar</h2>
+        <ul class="downloads-list reveal-stagger">
+            @foreach (var a in assets)
+            {
+                <li>
+                    <a class="download-row" href="@a.File" download>
+                        <div>
+                            <h3>@a.Title</h3>
+                            <p>@a.Format · @a.Size</p>
+                        </div>
+                        <span class="download-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 4v14M6 12l6 6 6-6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                        </span>
+                    </a>
+                </li>
+            }
+        </ul>
+        <p class="press-disclaimer">
+            Dosyalar henüz yüklenmedi — bu sayfa, marka kitabı ve görseller hazır olduğunda
+            indirme adreslerini içerecek. Acil ihtiyaçlar için doğrudan press@creida.co.
+        </p>
+    </div>
+</section>

@@ -1,0 +1,286 @@
+@page "/coming-soon"
+@using System.Globalization
+@{
+    Layout = null; // tam ekran, header/footer yok
+    var c = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEn = c == "en";
+    ViewData["Title"] = isEn ? "Coming soon — Creida" : "Yakında — Creida";
+}
+<!DOCTYPE html>
+<html lang="@c">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#000000" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --text: #F5F1EA;
+            --text-mute: #8C857A;
+            --line: rgba(245, 241, 234, 0.10);
+            --accent: #FFFFFF;
+            --accent-hot: #FFFFFF;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; height: 100%; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 18% 12%, rgba(255, 255, 255, 0.04), transparent 60%),
+                radial-gradient(ellipse 50% 40% at 90% 90%, rgba(255, 255, 255, 0.02), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-mark {
+            position: absolute;
+            width: min(70vh, 60vw);
+            height: min(70vh, 60vw);
+            right: -10%;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .wrap {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: clamp(40px, 8vw, 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+        .top-mark {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            margin-bottom: clamp(40px, 6vw, 64px);
+        }
+        .top-mark svg.sparkle {
+            width: 56px;
+            height: 56px;
+            color: var(--text);
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.10));
+            margin-right: -26px;
+            margin-top: -18px;
+            flex-shrink: 0;
+        }
+        .top-mark .word-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            line-height: 0.95;
+            padding-top: 6px;
+        }
+        .top-mark .word {
+            font-weight: 700;
+            font-size: 36px;
+            letter-spacing: -0.04em;
+        }
+        .top-mark .tagline {
+            font-size: 11px;
+            color: var(--text-mute);
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--text-mute);
+        }
+        .eyebrow::before {
+            content: "";
+            width: 24px; height: 1px;
+            background: currentColor;
+        }
+        h1 {
+            font-family: "Jost", sans-serif;
+            font-weight: 400;
+            font-size: clamp(48px, 8vw, 96px);
+            line-height: 0.98;
+            letter-spacing: -0.035em;
+            margin: 16px 0 24px;
+        }
+        h1 .italic {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .lede {
+            font-size: clamp(16px, 1.4vw, 19px);
+            color: var(--text-mute);
+            line-height: 1.6;
+            max-width: 52ch;
+            margin: 0 0 36px;
+        }
+        form {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(245, 241, 234, 0.22);
+            max-width: 460px;
+            transition: border-color 0.25s ease;
+        }
+        form:focus-within { border-color: var(--accent); }
+        form input {
+            flex: 1;
+            background: transparent;
+            border: 0;
+            outline: 0;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 16px;
+            padding: 12px 0;
+        }
+        form input::placeholder { color: rgba(245, 241, 234, 0.4); }
+        form button {
+            background: transparent;
+            border: 0;
+            color: var(--text);
+            cursor: pointer;
+            padding: 8px 14px;
+            border: 1px solid var(--text);
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+        form button:hover { background: var(--text); color: var(--bg); }
+        .form-note { color: var(--text-mute); font-size: 12px; margin-top: 12px; max-width: 460px; line-height: 1.5; }
+
+        .availability {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            margin-top: 32px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            font-size: 12px;
+            color: var(--text-mute);
+            width: max-content;
+        }
+        .availability .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--accent-hot);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @@keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .foot {
+            position: relative;
+            z-index: 1;
+            padding: 24px clamp(40px, 8vw, 80px);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-mute);
+            border-top: 1px solid var(--line);
+        }
+        .foot a { color: var(--text-mute); transition: color 0.2s ease; }
+        .foot a:hover { color: var(--text); }
+        .foot .social { display: flex; gap: 18px; }
+    </style>
+</head>
+<body>
+    <svg class="bg-mark" viewBox="742 520 97 97" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M774.36,617.05l-32.06.02c-.38-15.37,7.5-29.86,18.9-38.37,12.97-9.69,28.86-12.48,44.86-7.14,1.47-8.52-4.6-16.65-12.54-18.2-9-1.76-16.94,3.71-18.98,13.04l-32.2.12c1.08-26.13,23.14-46.23,49.04-45.64,25.97.59,47.06,21.47,47.07,48.3l.02,47.91-32.13-.1c-.49-9.74-7.71-15.85-16-15.92-8.39-.08-15.45,6.21-15.98,15.98Z" fill="currentColor"/>
+    </svg>
+
+    <div class="wrap">
+        <div class="top-mark">
+            <svg class="sparkle" viewBox="235 405 195 225" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M332.67,598.96l-3.54.18v-89.07s-88.65,0-88.65,0l-.05-3.24,31.78-.12c7.94-.03,15.48-1.62,22.76-4.48,11.68-4.59,20.83-12.92,26.61-24.07,4.83-9.31,7.5-19.47,7.52-30.08l.05-30.19,3.52-.03v88.96s88.85,0,88.85,0l.03,3.22-29.5.09c-22.76.07-41.28,10.74-51.34,31.32-4.76,9.74-7.89,20.33-7.93,31.24l-.1,26.25Z" fill="currentColor"/>
+            </svg>
+            <div class="word-block">
+                <span class="word">creida</span>
+                <span class="tagline">creative idea agency</span>
+            </div>
+        </div>
+
+        <span class="eyebrow">@(isEn ? "Coming soon" : "Yakında")</span>
+        <h1>
+            @if (isEn) {
+                <text>Building</text> <span class="italic">something new.</span>
+            } else {
+                <text>Yeni bir şey</text> <span class="italic">hazırlıyoruz.</span>
+            }
+        </h1>
+        <p class="lede">
+            @if (isEn) {
+                <text>Creida, kreatif düşünce ile dijital performansı tek odada birleştiren bağımsız bir reklam ajansıdır. Sitemiz çok yakında. Aşağıdaki adresten ilk siz haberdar olun — spam yok, sadece yayına geçtiğimizde bir mail.</text>
+            } else {
+                <text>Creida, kreatif düşünce ile dijital performansı tek odada birleştiren bağımsız bir reklam ajansıdır. Sitemiz çok yakında. Aşağıdaki adresten ilk siz haberdar olun — spam yok, sadece yayına geçtiğimizde bir mail.</text>
+            }
+        </p>
+
+        <form id="cs-form" autocomplete="off">
+            <input type="email" id="cs-email" name="email" placeholder="@(isEn ? "your@email.com" : "sen@markaniz.com")" required />
+            <button type="submit">@(isEn ? "Notify me" : "Haber ver")</button>
+        </form>
+        <p class="form-note">@(isEn ? "We'll email you once when we go live. No tracking, no third parties." : "Yayına geçtiğimizde tek bir mail atacağız. Takip kodu yok, üçüncü taraf yok.")</p>
+
+        <span class="availability">
+            <span class="dot"></span>
+            <span>@(isEn ? "Booking projects from April 2026" : "Nisan 2026 başlangıçlı yeni iş alıyoruz")</span>
+        </span>
+    </div>
+
+    <footer class="foot">
+        <span>© @DateTime.Now.Year Creida. @(isEn ? "All rights reserved." : "Tüm hakları saklıdır.")</span>
+        <div class="social">
+            <a href="mailto:hello@creida.co">hello@creida.co</a>
+            <a href="#" rel="noopener">Instagram</a>
+            <a href="#" rel="noopener">LinkedIn</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('cs-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = document.getElementById('cs-email').value.trim();
+            if (!/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(email)) { alert('@(isEn ? "Please enter a valid email." : "Geçerli bir e-posta girin.")'); return; }
+            var subject = encodeURIComponent('Yayına geçince haber ver — ' + email);
+            var body = encodeURIComponent('Site canlıya geçince haber ver lütfen.\n\nE-posta: ' + email);
+            window.location.href = 'mailto:hello@creida.co?subject=' + subject + '&body=' + body;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+@page "/team"
+@using Creida.Data
+@model Creida.Pages.TeamModel
+@{
+    ViewData["Title"] = "Ekip — Creida";
+}
+
+<section class="team-hero">
+    <div class="container">
+        <div class="team-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Ekip</span>
+                <h1 class="display team-headline">
+                    Aynı odada<br />
+                    <span class="italic accent">üç kurucu.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Creida'yı strateji, kreatif ve büyüme disiplinlerinin
+                aynı masada konuşabildiği yer olsun diye kurduk. Ekibimizi
+                üç kurucu yönetiyor; her brief'in açılış toplantısında
+                üçü de masada oturur.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="team-grid-section">
+    <div class="container">
+        <div class="team-grid reveal-stagger">
+            @foreach (var m in Model.Members)
+            {
+                <article class="member-card">
+                    <div class="member-photo">
+                        <img src="@m.PhotoUrl" alt="@m.Name portresi" loading="lazy" />
+                        <span class="member-role-badge">@m.ShortRole</span>
+                    </div>
+
+                    <header class="member-head">
+                        <h2>@m.Name</h2>
+                        <p class="member-role">@m.Role</p>
+                    </header>
+
+                    <p class="member-bio">@m.Bio</p>
+
+                    <ul class="member-highlights">
+                        @foreach (var h in m.Highlights)
+                        {
+                            <li>@h</li>
+                        }
+                    </ul>
+
+                    <blockquote class="member-quote">
+                        <p>"@m.Quote"</p>
+                    </blockquote>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="team-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Bizimle çalış</span>
+                <h2 class="display contact-headline">
+                    Ekibin <span class="italic accent">dördüncü</span><br />
+                    masası boş.
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Açık pozisyonlarımızı ya da staj başvurularını
+                    aşağıdaki adresten iletebilirsiniz. Genelde 48 saat
+                    içinde dönüş yapıyoruz.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="mailto:careers@creida.co">
+                        <span>careers@creida.co</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                    <a class="cta-button" href="/#contact">
+                        <span>Brief gönder</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

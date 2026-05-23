@@ -1,0 +1,121 @@
+@page "/results"
+@{
+    ViewData["Title"] = "Canlı Sonuçlar — Creida";
+    var lastUpdated = DateTime.Now.AddDays(-1).ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"));
+}
+
+@{
+    var bigStats = new[]
+    {
+        new { Value = "14",     Label = "Aktif kampanya",        Hint = "Şu an yönetilen" },
+        new { Value = "₺18,4M", Label = "Yönetilen medya bütçesi", Hint = "Son 90 günde" },
+        new { Value = "3.7×",   Label = "Ortalama ROAS",           Hint = "Tüm performans projeleri" },
+        new { Value = "₺48",    Label = "En düşük CAC",            Hint = "DTC kategorisi" }
+    };
+
+    var categoryRows = new[]
+    {
+        new { Cat = "DTC / Cilt Bakım", Active = 3, Roas = "4.2×", Cac = "₺48 – ₺120", Note = "En istikrarlı kategorimiz." },
+        new { Cat = "B2B SaaS",         Active = 2, Roas = "—",    Cac = "Lead başına ₺820", Note = "Uzun döngü, MQL → SQL %38." },
+        new { Cat = "Fintech",          Active = 2, Roas = "4.7×", Cac = "Kayıt başına ₺214", Note = "Aktivasyon oranı %34." },
+        new { Cat = "FMCG",             Active = 2, Roas = "—",    Cac = "—", Note = "Markalama + TVC; ölçü brand-lift." },
+        new { Cat = "Mobility",         Active = 1, Roas = "3.9×", Cac = "Test sürüş ₺68", Note = "Lansman fazı." },
+        new { Cat = "Specialty F&B",    Active = 1, Roas = "3.1×", Cac = "Abone ₺92", Note = "Marka deneyimi + sosyal." },
+        new { Cat = "Diğer",            Active = 3, Roas = "—",    Cac = "—", Note = "Brief aşamasında ya da prodüksiyonda." }
+    };
+}
+
+<section class="results-hero">
+    <div class="container">
+        <div class="results-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Canlı sonuçlar — @lastUpdated</span>
+                <h1 class="display results-headline">
+                    Rakamı<br />
+                    <span class="italic accent">utançtan saklamayız.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Aktif kampanyalarımızın anonimleştirilmiş özeti. Aylık olarak elle güncellenir
+                ve müşterilerimizin onayı dışında detay vermeyiz. Sektördeki çoğu ajansın
+                yapmadığı şeyi yapıyoruz çünkü güveni başka türlü inşa edemedik.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="results-bigstats">
+    <div class="container">
+        <div class="bigstats-grid reveal-stagger">
+            @foreach (var s in bigStats)
+            {
+                <article class="bigstat-card">
+                    <h2 class="bigstat-value">@s.Value</h2>
+                    <p class="bigstat-label">@s.Label</p>
+                    <span class="bigstat-hint">@s.Hint</span>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="results-table-section">
+    <div class="container">
+        <h2 class="section-subtitle">Kategori dağılımı</h2>
+        <div class="results-table-wrap reveal">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Aktif</th>
+                        <th scope="col">ROAS</th>
+                        <th scope="col">CAC / Aralık</th>
+                        <th scope="col">Not</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in categoryRows)
+                    {
+                        <tr>
+                            <th scope="row">@r.Cat</th>
+                            <td>@r.Active</td>
+                            <td>@r.Roas</td>
+                            <td>@r.Cac</td>
+                            <td class="muted-cell">@r.Note</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <p class="results-disclaimer">
+            "—" işareti: bu kategoride ROAS ya da kullanıcı bazlı CAC kullanılmıyor;
+            brand-lift, brand health veya offline metriklere bakıyoruz. Sayılar son 90
+            günün ortalamasıdır; tek kampanya bazında daha iyi/kötü sonuçlar olabilir.
+            Müşteri özelinde detay paylaşımı, sözleşmedeki gizlilik hükümlerine bağlıdır.
+        </p>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Görmek istersen</span>
+                <h2 class="display contact-headline">
+                    Detayını sözleşmede<br />
+                    <span class="italic accent">paylaşırız.</span>
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Çalışmaya başlayan müşteriler haftalık dashboard erişimine sahip olur.
+                    Önce konuşalım — açıklayabileceğimiz daha çok şey var.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="/#contact">Brief gönder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

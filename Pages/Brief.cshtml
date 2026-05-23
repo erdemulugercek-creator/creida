@@ -1,0 +1,135 @@
+@page "/brief"
+@{
+    ViewData["Title"] = "Brief Sihirbazı — Creida";
+}
+
+@{
+    var questions = new[]
+    {
+        new {
+            Key = "marka",
+            Number = "01",
+            Title = "Markanı bir cümlede anlat.",
+            Hint = "Ne yapıyor, kime hizmet ediyor? Jargonsuz. Anneanneye anlatır gibi."
+        },
+        new {
+            Key = "mesele",
+            Number = "02",
+            Title = "Şu an seni en çok ne sıkıyor?",
+            Hint = "Satış mı? Marka algısı mı? Yanlış kitleye konuşmak mı? Tek bir şey seç."
+        },
+        new {
+            Key = "kitle",
+            Number = "03",
+            Title = "Müşterinin bir gününü tarif et.",
+            Hint = "Persona şablonu değil — gerçek bir insanı düşün. Saat 9'da ne yapıyor? Telefonunda ilk neye bakıyor?"
+        },
+        new {
+            Key = "rakip",
+            Number = "04",
+            Title = "Rakiplerin ne yapıyor da senin yapmadığın?",
+            Hint = "İmreniyor olmana gerek yok — sadece gözlem. Tek bir şey."
+        },
+        new {
+            Key = "basari",
+            Number = "05",
+            Title = "Bu proje başarılı olduğunda ne değişir?",
+            Hint = "Somut bir sayı + somut bir his. \"Ayda 1000 yeni kullanıcı + müşteri hizmetleri telefonu çalmıyor.\""
+        },
+        new {
+            Key = "kacin",
+            Number = "06",
+            Title = "Bu markada KESİNLİKLE yapmayacağın şeyler?",
+            Hint = "İndirim kuponu, ünlü yüz, klişe metafor, hangisi olursa. Sınırı baştan koymak özgürleştirir."
+        },
+        new {
+            Key = "butce",
+            Number = "07",
+            Title = "Aklındaki bütçe aralığı?",
+            Hint = "Net rakam değil; aralık. \"300-500K\" ya da \"aylık 100K-civarı performans\" gibi."
+        },
+        new {
+            Key = "zaman",
+            Number = "08",
+            Title = "Lansman / canlıya çıkma zamanın?",
+            Hint = "Tarih ya da aralık. \"Eylül sonu\" ya da \"yıl bitmeden\" gibi. Esneklik varsa söyle."
+        }
+    };
+}
+
+<section class="brief-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Brief Sihirbazı</span>
+                <h1 class="display press-headline">
+                    Sekiz soru,<br />
+                    <span class="italic accent">net bir brief.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Cevaplarını yazdıktan sonra düzgün bir brief metni oluşturuyoruz —
+                indir ya da doğrudan bize gönder. Verilerin yalnızca senin tarayıcında
+                tutulur, bir sunucuya kaydedilmez. Yapay zekâ kullanmıyoruz; sadece soruları
+                doğru sıraya dizdik.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="brief-wizard">
+    <div class="container">
+        <div class="brief-grid">
+            <div class="brief-progress" id="brief-progress" aria-live="polite">
+                <div class="brief-progress-bar"></div>
+                <span class="brief-progress-label">0/8 soru · %0</span>
+            </div>
+
+            <form id="brief-form" class="brief-form" autocomplete="off">
+                @foreach (var q in questions)
+                {
+                    <fieldset class="brief-q">
+                        <legend>
+                            <span class="step-num">@q.Number</span>
+                            <span class="step-title">@q.Title</span>
+                        </legend>
+                        <p class="brief-hint">@q.Hint</p>
+                        <textarea name="@q.Key" rows="3" data-key="@q.Key"></textarea>
+                    </fieldset>
+                }
+
+                <fieldset class="brief-q">
+                    <legend>
+                        <span class="step-num">09</span>
+                        <span class="step-title">Sen kimsin?</span>
+                    </legend>
+                    <p class="brief-hint">Brief metnini indirmek ya da bize göndermek için.</p>
+                    <div class="brief-row">
+                        <input type="text" name="senderName" placeholder="Ad Soyad" data-key="senderName" />
+                        <input type="email" name="senderEmail" placeholder="E-posta" data-key="senderEmail" />
+                    </div>
+                </fieldset>
+
+                <div class="brief-actions">
+                    <button type="button" class="cta-button cta-button--big" id="brief-download">
+                        <span>Brief'i indir</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                            <path d="M12 4v14M6 12l6 6 6-6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button type="button" class="cta-button" id="brief-email">
+                        <span>Bana gönder</span>
+                    </button>
+                    <button type="button" class="cta-button" id="brief-creida">
+                        <span>Creida'ya gönder</span>
+                    </button>
+                </div>
+            </form>
+
+            <aside class="brief-preview">
+                <h3 class="brief-preview-title">Brief önizlemesi</h3>
+                <pre id="brief-output" class="brief-output"></pre>
+            </aside>
+        </div>
+    </div>
+</section>

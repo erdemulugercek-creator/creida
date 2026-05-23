@@ -1,0 +1,71 @@
+@page "/sectors"
+@using Creida.Data
+@model Creida.Pages.Sectors.IndexModel
+@{
+    ViewData["Title"] = "Sektörler — Creida";
+}
+
+<section class="press-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Sektörler</span>
+                <h1 class="display press-headline">
+                    Derinleştiğimiz<br />
+                    <span class="italic accent">üç alan.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Tüm sektörlerle çalışmıyoruz. Aşağıdaki üç alanda kategori
+                bilgisi, alıcı kişisi haritası ve kanıtlanmış oyun planlarımız var.
+                Diğer sektörlerden bir brief geldiğinde önce doğru partner olup olmadığımızı konuşuyoruz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="sectors-list-section">
+    <div class="container">
+        <ul class="sectors-list reveal-stagger">
+            @foreach (var s in Model.Sectors)
+            {
+                <li>
+                    <a class="sector-row" href="/sectors/@s.Slug">
+                        <div class="sector-row-text">
+                            <h2>@s.Name</h2>
+                            <p class="sector-row-tagline italic accent">@s.Headline1 @s.Headline2</p>
+                            <p class="sector-row-lede">@s.Lede</p>
+                            <span class="sector-row-meta">@s.PriceFrom'den başlar · @s.CaseSlugs.Count case</span>
+                        </div>
+                        <span class="sector-row-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                        </span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Sektörünüz listede yoksa</span>
+                <h2 class="display contact-headline">
+                    Yine de <span class="italic accent">konuşabiliriz.</span>
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Yukarıdaki üç alanın dışında bir kategorideyseniz, bizimle iyi bir eşleşme
+                    olup olmadığını dürüst bir görüşmeyle ölçeriz. Bütçe ve beklentilerinize göre
+                    yönlendirme yapıyoruz.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="/#contact">Brief gönder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

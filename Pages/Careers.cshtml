@@ -1,0 +1,134 @@
+@page "/careers"
+@{
+    ViewData["Title"] = "Kariyer — Creida";
+}
+
+@{
+    var openings = new[]
+    {
+        new {
+            Title = "Senior Sanat Yönetmeni",
+            Type = "Tam zamanlı · İstanbul · Hibrit",
+            Body = "5+ yıl ajans deneyimi. Marka kimliği ve dijital kreatif tarafında portfolyo şart. Figma + ileri seviye tipografi kültürü. Görseli savunabilen değil, anlatabilen bir kişi arıyoruz.",
+            Tags = new[] { "Tasarım", "Senior" }
+        },
+        new {
+            Title = "Performans Pazarlama Uzmanı",
+            Type = "Tam zamanlı · İstanbul · Hibrit",
+            Body = "3+ yıl Meta + Google + TikTok deneyimi. Attribution kurulumu ve dashboard tasarımı önemli. SaaS veya DTC tarafında çalışmış olmak avantaj. Excel'den çok SQL'i tercih ederiz.",
+            Tags = new[] { "Performans", "Mid+" }
+        },
+        new {
+            Title = "Stratejist (Junior-Mid)",
+            Type = "Tam zamanlı · İstanbul",
+            Body = "Brief'ten konuma, kullanıcı görüşmesinden mesaj mimarisine kadar her aşamada strateji ekibinin yanında çalışacak. Sosyal bilim eğitimi ya da gazetecilik geçmişi tercih sebebi.",
+            Tags = new[] { "Strateji", "Junior" }
+        },
+        new {
+            Title = "Staj — Strateji & Kreatif",
+            Type = "Yarı zamanlı · 4-6 ay · Mentörlü",
+            Body = "Üniversite 3. veya 4. sınıf öğrencileri için. Üç projede ekiple birlikte çalışma, haftalık 1:1 mentörlük, küçük ama makul ödeme. Başarılı stajın sonunda tam zamanlı pozisyon yolu açılabilir.",
+            Tags = new[] { "Staj", "Mentörlü" }
+        }
+    };
+
+    var perks = new[]
+    {
+        ("Hibrit çalışma", "Haftada 2-3 gün ofis, geri kalan zaman uzaktan. Ofis günleri ekiple birlikte kararlaştırılır."),
+        ("Cuma kısa günü", "Cuma 14:00 ofis kapanır. Yaz aylarında 13:00. Bunu pazarlık konusu yapmıyoruz."),
+        ("Eğitim bütçesi", "Yılda ₺15.000 kişisel eğitim/kitap/konferans bütçesi. Önceden onay yok, fatura getir, ödenir."),
+        ("Tam ödenen sağlık", "Allianz Optimum özel sağlık sigortası, kişi başı tam paket. Eş ve çocuk için indirimli."),
+        ("Stüdyo malzemesi", "MacBook Pro, iPad (tasarımcılar için), istediğin klavye + monitör. Yenileme döngüsü 3 yıl."),
+        ("Yıl başı kapanış", "31 Aralık-2 Ocak arası tüm ekip kapalı. Yıllık izinden düşmez.")
+    };
+}
+
+<section class="press-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Kariyer</span>
+                <h1 class="display press-headline">
+                    Ekibe<br />
+                    <span class="italic accent">katılmak ister misin?</span>
+                </h1>
+            </div>
+            <p class="lead">
+                14 kişilik bir ekiplik. Bu yıl 3 kişilik bir büyüme planımız var.
+                Aşağıdaki pozisyonlar açık; portfolyon hazırsa
+                <a href="mailto:careers@creida.co" class="link-underline">careers@creida.co</a>
+                adresine yaz. 48 saat içinde dönüş yapıyoruz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="careers-openings">
+    <div class="container">
+        <h2 class="section-subtitle">Açık pozisyonlar</h2>
+        <ul class="openings-list reveal-stagger">
+            @foreach (var o in openings)
+            {
+                <li>
+                    <article class="opening-row">
+                        <div>
+                            <h3>@o.Title</h3>
+                            <p class="opening-meta">@o.Type</p>
+                            <p class="opening-body">@o.Body</p>
+                            <div class="opening-tags">
+                                @foreach (var t in o.Tags)
+                                {
+                                    <span class="service-tag">@t</span>
+                                }
+                            </div>
+                        </div>
+                        <a class="cta-button" href="mailto:careers@creida.co?subject=@(Uri.EscapeDataString("Başvuru — " + o.Title))">
+                            <span>Başvur</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </article>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="careers-perks">
+    <div class="container">
+        <h2 class="section-subtitle">Çalışma kültürü ve avantajlar</h2>
+        <ul class="perks-list reveal-stagger">
+            @foreach (var (title, body) in perks)
+            {
+                <li class="perk-item">
+                    <h3>@title</h3>
+                    <p>@body</p>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Listede yoksan da yaz</span>
+                <h2 class="display contact-headline">
+                    Bizim <span class="italic accent">kişin</span><br />
+                    olabilirsin.
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Pozisyon listesinde olmasan bile, kendini Creida'da görüyorsan yaz.
+                    Genel bir başvuru havuzu tutuyoruz, doğru zaman geldiğinde dönüş yapıyoruz.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="mailto:careers@creida.co">careers@creida.co</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

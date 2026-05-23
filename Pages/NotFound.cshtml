@@ -1,0 +1,31 @@
+@page "/NotFound"
+@using System.Globalization
+@model Creida.Pages.NotFoundModel
+@{
+    var c = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEn = c == "en";
+    ViewData["Title"] = (isEn ? "Lost page" : "Kayıp sayfa") + " — Creida";
+}
+
+<section class="notfound">
+    <div class="container notfound-inner">
+        <div class="reveal">
+            <span class="eyebrow">@Model.StatusCode</span>
+            <h1 class="display notfound-headline">
+                @(isEn ? "This page is" : "Bu sayfa")<br />
+                <span class="italic accent">@(isEn ? "lost on us too." : "bizden de kayıp.")</span>
+            </h1>
+            <p class="muted notfound-lead">
+                @(isEn
+                    ? "The URL you're after doesn't exist here. Try one of the routes below or use Cmd+K to search."
+                    : "Aradığın URL burada yok. Aşağıdan seç ya da Cmd+K ile ara.")
+            </p>
+            <div class="notfound-links">
+                <a class="cta-button cta-button--big" href="/">@(isEn ? "Home" : "Ana sayfa")</a>
+                <a class="cta-button" href="/#work">@(isEn ? "Work" : "İşler")</a>
+                <a class="cta-button" href="/insights">Insights</a>
+                <a class="cta-button" href="/team">@(isEn ? "Team" : "Ekip")</a>
+            </div>
+        </div>
+    </div>
+</section>

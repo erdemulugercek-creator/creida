@@ -1,0 +1,154 @@
+@page "/report"
+@{
+    ViewData["Title"] = "Yıllık rapor 2025 — Creida";
+}
+
+@{
+    var pieRows = new[]
+    {
+        new { Cat = "DTC / E-ticaret",  Share = 32, Color = "#FFFFFF" },
+        new { Cat = "B2B SaaS",          Share = 22, Color = "#C8C8C5" },
+        new { Cat = "Fintech",           Share = 18, Color = "#969592" },
+        new { Cat = "FMCG",              Share = 14, Color = "#6E6D68" },
+        new { Cat = "Mobility",          Share = 8,  Color = "#4A4948" },
+        new { Cat = "Diğer",             Share = 6,  Color = "#2D2D2C" }
+    };
+
+    var headlineStats = new[]
+    {
+        new { V = "42",      L = "Yürütülen marka",              S = "27'si tam, 15'i kampanya bazlı" },
+        new { V = "₺164M",   L = "Yönetilen medya bütçesi",      S = "Yıl boyunca, tüm kanallar" },
+        new { V = "7",       L = "Sektör ödülü",                  S = "Kristal Elma, Effie, TDC, D&AD" },
+        new { V = "14",      L = "Tam zamanlı ekip",              S = "3 kurucu + 11 senior/mid" },
+        new { V = "9",       L = "Reddedilen brief",              S = "Etik, fit ya da bütçe nedeniyle" },
+        new { V = "%92",     L = "Müşteri yenileme oranı",        S = "İlk yıl sözleşmesi biten 13/14" }
+    };
+
+    var learnings = new[]
+    {
+        ("Erdem",
+         "Brief'in yarısı strateji değil, ekspektasyon yönetimidir.",
+         "Müşterinin ilk gün söylediği başarı kriteri ile altıncı ay söylediği farklıysa, brief eksik yazılmış demektir. Bu yıl, tüm projelere bir \"başarı sözleşmesi\" eklemeye başladık."),
+        ("Begüm",
+         "İyi tasarım, savunulması en az gereken tasarımdır.",
+         "Üçüncü turdan sonra hâlâ savunulması gereken bir karara saplandıysak, baştaki brief yanlış konumlandırıldı demektir. 2025'te tüm tasarım sunumlarımızda \"savunma slayt\"larını kaldırdık."),
+        ("Giray",
+         "Performans rakamı yalan söyleyebilir, kohort söylemez.",
+         "Bu yıl tüm müşterilere haftalık ROAS yerine 30-60-90 gün kohort raporu vermeye başladık. \"Reklam çalışıyor\" iddiası kısa pencerede her zaman güçlüdür; gerçek değer üç ayda görülür.")
+    };
+}
+
+<section class="report-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Yıllık rapor — 2025</span>
+                <h1 class="display press-headline">
+                    Bir yıl,<br />
+                    <span class="italic accent">açık defter.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Türkiye'deki ajansların çoğunun yıllık raporu yoktur; olanlar da sadece ödülleri
+                listeler. Biz 2025'te ne yaptığımızı, ne öğrendiğimizi, neyi yapmadığımızı
+                kayıt altına alıyoruz. Sonraki yıllarda da burada görüşürüz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="report-stats">
+    <div class="container">
+        <div class="report-stats-grid reveal-stagger">
+            @foreach (var s in headlineStats)
+            {
+                <article class="report-stat-card">
+                    <h2 class="bigstat-value">@s.V</h2>
+                    <p class="bigstat-label">@s.L</p>
+                    <span class="bigstat-hint">@s.S</span>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="report-pie">
+    <div class="container">
+        <h2 class="section-subtitle">Sektör dağılımı (proje sayısına göre)</h2>
+        <div class="pie-grid reveal">
+            <div class="pie-bars">
+                @foreach (var r in pieRows)
+                {
+                    <div class="pie-row">
+                        <div class="pie-row-meta">
+                            <span class="pie-cat">@r.Cat</span>
+                            <span class="pie-share">%@r.Share</span>
+                        </div>
+                        <div class="pie-bar" style="--bar-fill: @r.Share%; --bar-color: @r.Color"></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="report-learnings">
+    <div class="container">
+        <header class="section-head reveal">
+            <div>
+                <span class="eyebrow">Bir yılda öğrendiklerimiz</span>
+                <h2 class="section-title">Üç kurucu, <span class="italic accent">üç ders.</span></h2>
+            </div>
+            <p class="lead">
+                Yıl içinde yaptığımız her brief'in, her sözleşmenin, her kapanmış kampanyanın
+                ardından geriye bakıp aldığımız notların damıtılmış üç sonucu.
+            </p>
+        </header>
+
+        <div class="learnings-grid reveal-stagger">
+            @foreach (var (who, line, body) in learnings)
+            {
+                <article class="learning-card">
+                    <span class="learning-author">@who</span>
+                    <h3 class="learning-line">@line</h3>
+                    <p class="learning-body">@body</p>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="report-next">
+    <div class="container">
+        <h2 class="section-subtitle">2026'da ne yapacağız</h2>
+        <ul class="report-next-list reveal-stagger">
+            <li><span class="next-mark">→</span> Yıllık brand health araştırmasını tüm müşterilere standart yapacağız.</li>
+            <li><span class="next-mark">→</span> Equity karşılığı çalışmayı yıllık 1-2 erken aşama markada deneyeceğiz.</li>
+            <li><span class="next-mark">→</span> Insights yazılarını haftalığa çıkarmaya çalışacağız.</li>
+            <li><span class="next-mark">→</span> Ekibe 2 senior + 1 junior alımı yapacağız. Stüdyoya bir oda ekledik.</li>
+            <li><span class="next-mark">→</span> Yıl sonunda 2026 raporunu burada paylaşacağız. Söz.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Bu rapor seni etkilediyse</span>
+                <h2 class="display contact-headline">
+                    Bir <span class="italic accent">brief</span><br />
+                    yeter.
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Şeffaflık iddiamızı sözleşmede de görürsün. Karar verici görüşmesi için yaz.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="/#contact">Brief gönder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

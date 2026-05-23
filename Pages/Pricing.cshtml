@@ -1,0 +1,147 @@
+@page "/pricing"
+@{
+    ViewData["Title"] = "Fiyatlandırma — Creida";
+}
+
+@{
+    var tiers = new[]
+    {
+        new {
+            Name = "Marka & Kimlik",
+            Price = "₺250.000",
+            Suffix = "den başlar",
+            Duration = "10–14 hafta",
+            Body = "Strateji, isimlendirme, görsel kimlik, ses tonu ve marka rehberi. Kurumsal lansman ya da yeni iş kolu için sıfırdan iskelet.",
+            Includes = new[] { "Karar verici + müşteri görüşmeleri", "Konumlandırma + mesaj mimarisi", "Logo + tipografi sistemi", "Görsel kimlik rehberi (PDF)", "3 tur iterasyon", "İlk yıl danışmanlık" }
+        },
+        new {
+            Name = "Kreatif Kampanya",
+            Price = "₺180.000",
+            Suffix = "den başlar",
+            Duration = "6–10 hafta",
+            Body = "Büyük fikir, çok kanallı kampanya konsepti. Ürün lansmanı, marka yenileme veya yıllık ana kampanya için.",
+            Includes = new[] { "Brief + konsept atölyesi", "Ana fikir + 2 alternatif yön", "Anahtar görsel/film konsepti", "OOH, dijital ve sosyal adaptasyon", "Prodüksiyon yönetimi (ek bütçe)", "Lansman destekli ilk 30 gün" }
+        },
+        new {
+            Name = "Performans Pazarlaması",
+            Price = "₺80.000",
+            Suffix = "/ay + medya bütçesi",
+            Duration = "Minimum 6 ay",
+            Body = "Meta, Google, TikTok, LinkedIn üzerinde sürekli yönetim. Haftalık kreatif, sürekli optimizasyon, şeffaf dashboard.",
+            Includes = new[] { "Kanal stratejisi + attribution kurulumu", "Haftalık 8 kreatif varyant", "İki haftada bir CRO testi", "Aylık brand lift okuması", "Haftalık standup + dashboard", "Karşılıklı 30 günlük çıkış maddesi" }
+        },
+        new {
+            Name = "360° Anlaşma",
+            Price = "₺350.000",
+            Suffix = "/ay'dan başlar",
+            Duration = "12 ay+",
+            Body = "Marka, kreatif, içerik, performans tek anlaşmada. Büyüyen markalar ve scale-up'lar için tam paket.",
+            Includes = new[] { "Yıllık marka planı", "Aylık kampanya + içerik takvimi", "Performans yönetimi (medya hariç)", "Kuruculardan birinin proje sponsorluğu", "Çeyreklik strateji incelemesi", "Yıllık marka health araştırması" }
+        }
+    };
+
+    var faqs = new[]
+    {
+        ("Bu fiyatlar neye göre değişir?",
+         "Pazar olgunluğu, hedef bölge sayısı, ürün çeşidi, prodüksiyon kapsamı ve iterasyon talebine göre. Net fiyatı brief'ten sonra veriyoruz; tahmini aralık ilk görüşmede netleşir."),
+        ("KDV dahil mi?",
+         "Hayır, fiyatlar KDV hariçtir. %20 KDV eklenir. Yurt dışı müşterilerde ihracat istisnası uygulanır."),
+        ("Ödeme planı?",
+         "Marka & kimlik: %30 başlangıç, %40 yarı, %30 teslim. Kampanya: %50 başlangıç, %50 teslim. Aylık anlaşmalarda her ayın 1'inde fatura."),
+        ("Daha düşük bütçeyle çalışıyor musunuz?",
+         "Düzenli olarak hayır. Bütçeniz bu aralıkların altındaysa, doğru ölçekte başka bir partner önerebiliriz; üzerinize sorun gibi düşmek istemiyoruz."),
+        ("Equity / hisse karşılığı çalışır mısınız?",
+         "Belirli sayıda, dikkatle seçilmiş erken aşama markada evet — yıllık 1-2 vaka. Fikir aşamasındaki girişimciler için açıkça konuşalım.")
+    };
+}
+
+<section class="pricing-hero">
+    <div class="container">
+        <div class="press-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Fiyatlandırma</span>
+                <h1 class="display press-headline">
+                    Açık yazıyoruz.<br />
+                    <span class="italic accent">Üçüncü toplantıya bırakmadan.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                Türkiye'deki çoğu ajansın saklı tuttuğu rakamlar.
+                Sizi de bizi de zaman kaybından kurtarsın diye baştan yazıyoruz.
+                Net teklif brief'ten sonra netleşir; bu sayfa tahmin aralığıdır.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="pricing-tiers">
+    <div class="container">
+        <div class="tier-grid reveal-stagger">
+            @foreach (var t in tiers)
+            {
+                <article class="tier-card">
+                    <header class="tier-head">
+                        <h2>@t.Name</h2>
+                        <div class="tier-price-row">
+                            <span class="tier-price">@t.Price</span>
+                            <span class="tier-suffix">@t.Suffix</span>
+                        </div>
+                        <span class="tier-duration">@t.Duration</span>
+                    </header>
+                    <p class="tier-body">@t.Body</p>
+                    <ul class="tier-includes">
+                        @foreach (var i in t.Includes)
+                        {
+                            <li>@i</li>
+                        }
+                    </ul>
+                    <a class="cta-button cta-button--big" href="/#contact">
+                        <span>Brief gönder</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="pricing-faq">
+    <div class="container">
+        <h2 class="section-subtitle">Sıkça sorulanlar</h2>
+        <dl class="faq-list reveal-stagger">
+            @foreach (var (q, a) in faqs)
+            {
+                <div class="faq-item">
+                    <dt>@q</dt>
+                    <dd>@a</dd>
+                </div>
+            }
+        </dl>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Uygun aralık burada</span>
+                <h2 class="display contact-headline">
+                    Bir <span class="italic accent">brief</span><br />
+                    yeter.
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Bu sayfayı okuyup hâlâ uygun hissediyorsanız, ihtiyacınızı
+                    detaylandırmak için 48 saat içinde dönüş yapıyoruz.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="/#contact">Brief gönder</a>
+                    <a class="cta-button" href="/brief">Brief sihirbazını dene</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

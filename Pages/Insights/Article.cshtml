@@ -1,0 +1,77 @@
+@page "/insights/{slug}"
+@model Creida.Pages.Insights.ArticleModel
+@{
+    ViewData["Title"] = $"{Model.Post.Meta.Title} — Creida";
+}
+
+<article class="article-page">
+    <section class="article-hero">
+        <div class="container">
+            <a class="case-back" href="/insights">
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path d="M19 12H5M11 6L5 12l6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Tüm yazılar</span>
+            </a>
+
+            <div class="article-meta reveal">
+                <span class="insight-category">@Model.Post.Meta.Category</span>
+                <span class="article-meta-dot">·</span>
+                <span>@Model.Post.Meta.Date.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</span>
+                <span class="article-meta-dot">·</span>
+                <span>@Model.Post.Meta.ReadingTime</span>
+            </div>
+
+            <h1 class="display article-title reveal">@Model.Post.Meta.Title</h1>
+            @if (!string.IsNullOrEmpty(Model.Post.Meta.Subtitle))
+            {
+                <p class="article-subtitle italic accent reveal">@Model.Post.Meta.Subtitle</p>
+            }
+            <p class="article-author reveal">@Model.Post.Meta.Author</p>
+        </div>
+    </section>
+
+    <section class="article-body">
+        <div class="container">
+            <div class="prose reveal">
+                @Html.Raw(Model.Post.HtmlBody)
+            </div>
+        </div>
+    </section>
+
+    @if (Model.OtherPosts.Count > 0)
+    {
+        <section class="article-more">
+            <div class="container">
+                <header class="section-head reveal" style="grid-template-columns:1fr;">
+                    <div>
+                        <span class="eyebrow">Diğer yazılar</span>
+                        <h2 class="section-title">Devam <span class="italic accent">et.</span></h2>
+                    </div>
+                </header>
+
+                <ul class="insights-list">
+                    @foreach (var p in Model.OtherPosts)
+                    {
+                        <li>
+                            <a class="insight-row" href="/insights/@p.Meta.Slug">
+                                <div class="insight-row-meta">
+                                    <span class="insight-date">@p.Meta.Date.ToString("dd.MM.yyyy")</span>
+                                    <span class="insight-category">@p.Meta.Category</span>
+                                </div>
+                                <div class="insight-row-text">
+                                    <h2>@p.Meta.Title</h2>
+                                    <p>@p.Meta.Subtitle</p>
+                                    <span class="insight-author">@p.Meta.Author · @p.Meta.ReadingTime</span>
+                                </div>
+                                <span class="insight-arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                                </span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </section>
+    }
+</article>

@@ -1,0 +1,114 @@
+@page "/manifesto"
+@{
+    ViewData["Title"] = "Yapmadıklarımız — Creida";
+}
+
+@{
+    var rules = new[]
+    {
+        new {
+            No = "01",
+            Title = "Brief'siz iş başlatmayız.",
+            Body = "Bir kampanyaya iyi başlamanın tek yolu, neyi neden yaptığımızı bilmektir. Acil de olsa, dostane bir teklif de olsa, brief netleşmeden ekibe iş vermeyiz. Brief netleşmiyorsa müşteriyle birlikte iki günde yazarız — keşif sürecini bahane etmeyiz."
+        },
+        new {
+            No = "02",
+            Title = "Ölçemediğimiz kampanyayı önermeyiz.",
+            Body = "Brand awareness için TVC yapıyor olabiliriz; satış için Meta reklam yapıyor olabiliriz. Hangisi olursa olsun, çıkışında ne ölçeceğimizi başında söyleriz. Ölçü tanımlanmayan kampanya, müşteri için lüks bir hediyedir; biz lüks hediye satmıyoruz."
+        },
+        new {
+            No = "03",
+            Title = "Jenerik kreatif çalışmıyoruz.",
+            Body = "Şablon banner, AI-generated copywriting, \"hızlı sosyal medya postu\" gibi işleri kategorik olarak almıyoruz. Bizim ürettiğimiz her şey, bir stratejiye bağlı, bir hedef kitleye yazılmış, bir başarı kriterine kalibre edilmiş olmalı. Aksi: müşterinin bütçesinin israfı."
+        },
+        new {
+            No = "04",
+            Title = "Sınırsız iterasyon vermiyoruz.",
+            Body = "Üç tur iterasyonla anlaşma yapmadıysak iş başlamaz. Üçüncü turdan sonra düzeltme istemek, brief'te bir şey eksikti demek; bu da ücretsiz değil, ek bir iş kalemi açar. Net sınır, net kreatif yapar."
+        },
+        new {
+            No = "05",
+            Title = "Ucuz fiyat üzerinden iş almıyoruz.",
+            Body = "Fiyatımız sektör ortalamasının altında değil; çünkü ürettiğimiz iş ortalama değil. Bütçesi ciddi olmayan müşteriye \"size özel indirim\" yapmayız — onun yerine doğru ölçekte başka bir partner öneririz."
+        },
+        new {
+            No = "06",
+            Title = "Müşteriyi kuruculardan ayrı tutmayız.",
+            Body = "Üçümüz de — Erdem, Begüm, Giray — her brief'in açılış toplantısında masada oturur. \"Senior'dan junior'a brief geçişi\" yoktur. Aylık ritim toplantılarına da kurucu seviyesi katılır."
+        },
+        new {
+            No = "07",
+            Title = "Müşterinin işini reddetmekten korkmuyoruz.",
+            Body = "Strateji yanlışsa söyleriz. Beklenti gerçekçi değilse söyleriz. Çalışmak için doğru zaman değilse söyleriz. Geri çevirdiğimiz briefler vardır; bu, müşteriye karşı saygımızın ifadesidir."
+        },
+        new {
+            No = "08",
+            Title = "İlk iterasyonu beğenmediyseniz ücret almıyoruz.",
+            Body = "Brief'i yanlış anlamış olabiliriz; bu bizim sorumluluğumuz, sizin değil. İlk kreatif sunumunda beğenmediğiniz iş için sözleşme bedeli oluşmaz; baştan başlamayı tercih ederiz ya da yollarımız dostane ayrılır. Yıllarda 1-2 vaka oldu, ortalama etkisi sıfıra yakın; karşılığında müşteri ile aramızda kurduğu güven her şeyden değerli."
+        }
+    };
+}
+
+<section class="manifesto-hero">
+    <div class="container">
+        <div class="manifesto-hero-grid reveal">
+            <div>
+                <span class="eyebrow">Yapmadıklarımız</span>
+                <h1 class="display manifesto-headline">
+                    Hayır demek<br />
+                    <span class="italic accent">de işin parçası.</span>
+                </h1>
+            </div>
+            <p class="lead">
+                İyi reklam, sadece neyi yaptığımızla değil; neyi yapmadığımızla
+                tanımlanır. Aşağıdaki yedi maddeyi, çalıştığımız tüm müşterilerle
+                ilk gün açıkça konuşuyoruz.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="manifesto-rules">
+    <div class="container">
+        <ol class="rules-list reveal-stagger">
+            @foreach (var r in rules)
+            {
+                <li class="rule">
+                    <span class="rule-num">@r.No</span>
+                    <div>
+                        <h2 class="rule-title">@r.Title</h2>
+                        <p class="rule-body">@r.Body</p>
+                    </div>
+                </li>
+            }
+        </ol>
+    </div>
+</section>
+
+<section class="process-cta">
+    <div class="container">
+        <div class="team-cta-grid reveal">
+            <div>
+                <span class="eyebrow">Uyumlu hissediyorsan</span>
+                <h2 class="display contact-headline">
+                    Bir <span class="italic accent">brief</span><br />
+                    yeter.
+                </h2>
+            </div>
+            <div class="team-cta-actions">
+                <p class="muted">
+                    Bu yedi maddeyi okuyup hâlâ bizimle çalışmak istiyorsan,
+                    muhtemelen iyi bir eşleşmeyiz.
+                </p>
+                <div class="team-cta-buttons">
+                    <a class="cta-button cta-button--big" href="/#contact">
+                        <span>Brief gönder</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

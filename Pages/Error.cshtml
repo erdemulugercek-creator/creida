@@ -1,0 +1,30 @@
+@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Bir hata oluştu — Creida";
+}
+
+<section class="hero">
+    <div class="container hero-inner">
+        <span class="eyebrow">Hata</span>
+        <h1 class="display hero-headline" style="font-size:clamp(48px, 9vw, 130px);">
+            <span class="line">Bir şey</span>
+            <span class="line italic accent">ters gitti.</span>
+        </h1>
+        <p class="lead" style="max-width:56ch;color:var(--text-mute);">
+            Üzgünüz, aradığınız sayfa şu anda erişilebilir değil. Ana sayfaya dönerek tekrar deneyebilirsiniz.
+        </p>
+        <div>
+            <a class="cta-button cta-button--big" href="/">
+                <span>Ana sayfaya dön</span>
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.RequestId))
+        {
+            <p class="muted" style="font-size:12px;">İstek No: <code>@Model.RequestId</code></p>
+        }
+    </div>
+</section>
